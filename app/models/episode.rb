@@ -10,7 +10,6 @@ class Episode < ApplicationRecord
                         :episode_number
 
   has_many :posts
-  delegate :show, :to => :season, :allow_nil => true
-  belongs_to :season
+  belongs_to :show
 
 end

@@ -4,8 +4,7 @@ class Show < ApplicationRecord
 
   validates_presence_of :summary
 
-  has_many :seasons
-  has_many :episodes, through: :seasons
+  has_many :episodes
   has_and_belongs_to_many :users
 
 end
