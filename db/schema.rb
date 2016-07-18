@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718144629) do
+ActiveRecord::Schema.define(version: 20160718151015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "episodes", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "air_date"
+    t.integer  "runtime"
+    t.string   "show_format"
+    t.integer  "show_id"
+    t.index ["show_id"], name: "index_episodes_on_show_id", using: :btree
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text    "content"
+    t.integer "episode_id"
+    t.integer "user_id"
+    t.index ["episode_id"], name: "index_posts_on_episode_id", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
+  create_table "shows", force: :cascade do |t|
+    t.string "title"
+    t.string "cover_img_url"
+    t.text   "summary"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +51,15 @@ ActiveRecord::Schema.define(version: 20160718144629) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "avatar_url"
+    t.text     "bio"
+    t.string   "screen_name"
+    t.string   "location"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "episodes", "shows"
+  add_foreign_key "posts", "episodes"
+  add_foreign_key "posts", "users"
 end
