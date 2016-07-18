@@ -10,7 +10,7 @@ class Episode < ApplicationRecord
                         :episode_number
 
   has_many :posts
-  belongs_to :show, through: :season
+  # belongs_to :show, through: :season
   belongs_to :season
 
 end
