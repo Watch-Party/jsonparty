@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :posts
 
   has_many :watchers, through: :watcher_watches, source: :watcher
-  has_many :watcher_watches, foreign_key: :watcher_id, class_name: 'Watch'
+  has_many :watcher_watches, foreign_key: :watched_id, class_name: 'Watch'
 
   has_many :watched, through: :watched_watches, source: :watched
-  has_many :watched_watches, foreign_key: :watched_id, class_name: 'Watch'
+  has_many :watched_watches, foreign_key: :watcher_id, class_name: 'Watch'
 end

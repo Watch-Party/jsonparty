@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718181149) do
+ActiveRecord::Schema.define(version: 20160718183631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20160718181149) do
   end
 
   create_table "watches", force: :cascade do |t|
+    t.integer "watcher_id"
+    t.integer "watched_id"
   end
 
   add_foreign_key "episodes", "seasons"
