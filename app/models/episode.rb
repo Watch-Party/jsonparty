@@ -1,7 +1,7 @@
 class Episode < ApplicationRecord
 
-  validates_uniqueness_of :title, scope: :show
-  validates_uniqueness_of :air_date, scope: :show
+  validates_uniqueness_of :title, scope: :season
+  validates_uniqueness_of :air_date, scope: :season
 
   validates_presence_of :title,
                         :air_date,
@@ -10,6 +10,7 @@ class Episode < ApplicationRecord
                         :episode_number
 
   has_many :posts
-  belongs_to :show
+  belongs_to :show, through: :season
+  belongs_to :season
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718153011) do
+ActiveRecord::Schema.define(version: 20160718173658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160718153011) do
     t.integer  "show_id"
     t.integer  "season"
     t.integer  "episode_number"
+    t.integer  "season_id"
+    t.index ["season_id"], name: "index_episodes_on_season_id", using: :btree
     t.index ["show_id"], name: "index_episodes_on_show_id", using: :btree
   end
 
@@ -33,6 +35,12 @@ ActiveRecord::Schema.define(version: 20160718153011) do
     t.integer "time_in_episode"
     t.index ["episode_id"], name: "index_posts_on_episode_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "season_number"
+    t.integer "show_id"
+    t.index ["show_id"], name: "index_seasons_on_show_id", using: :btree
   end
 
   create_table "shows", force: :cascade do |t|
@@ -62,7 +70,12 @@ ActiveRecord::Schema.define(version: 20160718153011) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "watches", force: :cascade do |t|
+  end
+
+  add_foreign_key "episodes", "seasons"
   add_foreign_key "episodes", "shows"
   add_foreign_key "posts", "episodes"
   add_foreign_key "posts", "users"
+  add_foreign_key "seasons", "shows"
 end
