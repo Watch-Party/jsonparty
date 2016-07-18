@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718151015) do
+ActiveRecord::Schema.define(version: 20160718152649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160718151015) do
     t.text    "content"
     t.integer "episode_id"
     t.integer "user_id"
+    t.integer "time_in_episode"
     t.index ["episode_id"], name: "index_posts_on_episode_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
