@@ -29,13 +29,13 @@ class MyApi
         email: @email,
         password: @password,
         password_confirmation: @password,
-        first_name: "Melody",
-        last_name: "Jordan",
-        screen_name: "gemel"
+        first_name: "David",
+        last_name: "Grayboff",
+        screen_name: "GrayDav"
           }
         }
 
-    # r = JSON.parse(resp.body)
+    r = JSON.parse(resp.body)
     binding.pry
   end
 
@@ -51,7 +51,7 @@ end
 
 
 # print "What's your email? > "
-email = "mj@example.com"
+email = "dg@example.com"
 
 # print "What's your password? > "
 password = "hunter2"

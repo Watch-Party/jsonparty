@@ -60,3 +60,5 @@ end
 gem 'rack-cors', :require => 'rack/cors'
 gem 'rails-erd'
 gem 'httparty'
+gem 'github-markup'
+gem 'redcarpet'
