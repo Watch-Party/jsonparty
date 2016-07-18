@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718180403) do
+ActiveRecord::Schema.define(version: 20160718181149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,10 @@ ActiveRecord::Schema.define(version: 20160718180403) do
     t.datetime "air_date"
     t.integer  "runtime"
     t.string   "show_format"
-    t.integer  "show_id"
     t.integer  "season"
     t.integer  "episode_number"
     t.integer  "season_id"
     t.index ["season_id"], name: "index_episodes_on_season_id", using: :btree
-    t.index ["show_id"], name: "index_episodes_on_show_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -76,7 +74,6 @@ ActiveRecord::Schema.define(version: 20160718180403) do
   end
 
   add_foreign_key "episodes", "seasons"
-  add_foreign_key "episodes", "shows"
   add_foreign_key "posts", "episodes"
   add_foreign_key "posts", "users"
   add_foreign_key "seasons", "shows"
