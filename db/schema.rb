@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718183631) do
+ActiveRecord::Schema.define(version: 20160718193640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20160718183631) do
     t.text   "summary"
   end
 
+  create_table "shows_users", force: :cascade do |t|
+    t.integer "show_id"
+    t.integer "user_id"
+    t.index ["show_id"], name: "index_shows_users_on_show_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -79,4 +85,5 @@ ActiveRecord::Schema.define(version: 20160718183631) do
   add_foreign_key "posts", "episodes"
   add_foreign_key "posts", "users"
   add_foreign_key "seasons", "shows"
+  add_foreign_key "shows_users", "shows"
 end

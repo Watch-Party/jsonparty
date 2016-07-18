@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :screen_name
 
-  has_many :shows
+  has_and_belongs_to_many :shows
   has_many :posts
 
   has_many :watchers, through: :watcher_watches, source: :watcher
