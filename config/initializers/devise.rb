@@ -252,6 +252,28 @@ Devise.setup do |config|
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
+
+  class CustomStrategy < Devise::Strategies::Base
+   def valid?
+     request.env["HTTP_AUTHORIZATION"].present?
+   end
+
+   def authenticate!
+     email = request.env["HTTP_AUTHORIZATION"].match(/^.*(?=(\:))/)
+     password = request.env["HTTP_AUTHORIZATION"].match(/(?<=:)[^\]]+/)
+     user  = User.find_by email: email, password: password
+     if user
+       success! user
+     else
+       fail! "Email or Password is incorrect"
+     end
+   end
+ end
+
+ config.warden do |manager|
+   manager.strategies.add(:auth_header, CustomStrategy)
+   manager.default_strategies(scope: :user).unshift :auth_header
+ end
   #
   # config.warden do |manager|
   #   manager.intercept_401 = false
