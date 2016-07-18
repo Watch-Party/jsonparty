@@ -57,4 +57,5 @@ group :development, :test do
   gem 'binding_of_caller'
 end
 
+gem 'rails-erd'
 gem 'httparty'
