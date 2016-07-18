@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
     @episode = Episode.find params[:id]
   end
 
-  def show_index
+  def index
     @show = Show.find params[:id]
     @episodes = @show.episodes.all
   end
