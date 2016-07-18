@@ -5,7 +5,9 @@ class Episode < ApplicationRecord
 
   validates_presence_of :title,
                         :air_date,
-                        :runtime
+                        :runtime,
+                        :season,
+                        :episode_number
 
   has_many :posts
   belongs_to :show
