@@ -57,5 +57,6 @@ group :development, :test do
   gem 'binding_of_caller'
 end
 
+gem 'rack-cors', :require => 'rack/cors'
 gem 'rails-erd'
 gem 'httparty'
