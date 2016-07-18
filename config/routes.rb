@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :destroy]
 
-  resources :shows, except: [:new, :edit]
+  resources :shows, except: [:new, :edit] do
+    resources :episodes, shallow: true
+  end
 end
