@@ -21,6 +21,24 @@ class MyApi
         }
     binding.pry
   end
+
+  def signup
+    resp = MyApi.post "/users.json", #headers: headers,
+    body: {
+      user: {
+        email: @email,
+        password: @password,
+        password_confirmation: @password,
+        first_name: "Melody",
+        last_name: "Jordan",
+        screen_name: "gemel"
+          }
+        }
+
+    # r = JSON.parse(resp.body)
+    binding.pry
+  end
+
   private
 
   def headers
@@ -32,11 +50,11 @@ class MyApi
 end
 
 
-print "What's your email? > "
-email = gets.chomp
+# print "What's your email? > "
+email = "mj@example.com"
 
-print "What's your password? > "
-password = gets.chomp
+# print "What's your password? > "
+password = "hunter2"
 
 api = MyApi.new email, password
-api.login
+api.signup
