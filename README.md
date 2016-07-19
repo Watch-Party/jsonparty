@@ -9,18 +9,18 @@
 
 body:
 
-```
+
 
             user: {
                   email: email,
                   password: password
                   }
 
-```
+
 
 **response**
 
-```
+
 
           {
             "id":5,
@@ -35,7 +35,7 @@ body:
             "last_name":"Neely"
           }
 
-```
+
 
 
 ## To sign up
