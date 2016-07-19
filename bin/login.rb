@@ -3,7 +3,7 @@ require 'pry'
 
 class MyApi
   include HTTParty
-  base_uri "http://localhost:3000"
+  base_uri "https://json-party.herokuapp.com"
 
   def initialize email, password
     @email = email
