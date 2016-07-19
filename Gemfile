@@ -65,3 +65,5 @@ gem 'github-markup'
 gem 'redcarpet'
 gem 'figaro'
 gem 'carrierwave'
+gem "mini_magick"
+gem 'fog-aws'
