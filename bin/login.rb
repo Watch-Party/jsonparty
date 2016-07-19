@@ -31,7 +31,7 @@ class MyApi
         password_confirmation: @password,
         first_name: "David",
         last_name: "Grayboff",
-        screen_name: "GrayDav"
+        screen_name: "json2"
           }
         }
 
@@ -51,7 +51,7 @@ end
 
 
 # print "What's your email? > "
-email = "dg@example.com"
+email = "jtj@example.com"
 
 # print "What's your password? > "
 password = "hunter2"
