@@ -64,4 +64,3 @@ gem 'httparty'
 gem 'github-markup'
 gem 'redcarpet'
 gem 'figaro'
-gem "paperclip", "~> 5.0.0"
