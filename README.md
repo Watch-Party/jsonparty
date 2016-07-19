@@ -21,6 +21,7 @@ body:
 **response**
 
 ```
+
           {"id":5,
           "email":"something@example.com",
           "created_at":"2016-07-18T21:35:19.926Z",
@@ -31,6 +32,7 @@ body:
           "location":nil,
           "first_name":"Brad",
           "last_name":"Neely"}
+
 ```
 
 
@@ -57,6 +59,7 @@ body:
 **response**
 
 ```
+
           {"id":5,
           "email":"something@example.com",
           "created_at":"2016-07-18T21:35:19.926Z",
@@ -67,4 +70,5 @@ body:
           "location":nil,
           "first_name":"Brad",
           "last_name":"Neely"}
+          
 ```
