@@ -1,24 +1,70 @@
-# README
+# json-party
+## The json API for Watch Party!
+"Your Shows, Your Friends, On Your Time"
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## To log in
+####POST "https://json-party.herokuapp.com/users/sign_in.json"
 
-Things you may want to cover:
+**request**
 
-* Ruby version
+body:
 
-* System dependencies
+```
 
-* Configuration
+            user: {
+                  email: email,
+                  password: password
+                  }
 
-* Database creation
+```
 
-* Database initialization
+**response**
 
-* How to run the test suite
+```
+          {"id":5,
+          "email":"something@example.com",
+          "created_at":"2016-07-18T21:35:19.926Z",
+          "updated_at":"2016-07-18T21:35:19.930Z",
+          "avatar_url":nil,
+          "bio":nil,
+          "screen_name":"preteenwithapredatorhead",
+          "location":nil,
+          "first_name":"Brad",
+          "last_name":"Neely"}
+```
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## To sign up
+####POST "https://json-party.herokuapp.com/users.json"
 
-* ...
+**request**
+
+body:
+
+```
+
+          user: {
+                email: email,
+                password: password,
+                password_confirmation: password,
+                first_name: first,
+                last_name: last,
+                screen_name: sr
+                }
+
+```
+
+**response**
+
+```
+          {"id":5,
+          "email":"something@example.com",
+          "created_at":"2016-07-18T21:35:19.926Z",
+          "updated_at":"2016-07-18T21:35:19.930Z",
+          "avatar_url":nil,
+          "bio":nil,
+          "screen_name":"preteenwithapredatorhead",
+          "location":nil,
+          "first_name":"Brad",
+          "last_name":"Neely"}
+```
