@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :screen_name
 
+  mount_uploader :avatar, AvatarUploader
+
   has_and_belongs_to_many :shows
   has_many :posts
 
