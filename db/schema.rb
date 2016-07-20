@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719202252) do
+ActiveRecord::Schema.define(version: 20160720132911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20160719202252) do
     t.string   "title"
     t.datetime "air_date"
     t.integer  "runtime"
-    t.string   "show_format"
     t.integer  "season"
     t.integer  "episode_number"
     t.integer  "show_id"
