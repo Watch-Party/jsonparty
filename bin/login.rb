@@ -3,7 +3,7 @@ require 'pry'
 
 class MyApi
   include HTTParty
-  base_uri "https://json-party.herokuapp.com"
+  base_uri "http://localhost:3000/"
 
   def initialize email, password
     @email = email
@@ -11,31 +11,25 @@ class MyApi
   end
 
   def login
-    resp = MyApi.post "/users/sign_in.json", #headers: headers,
+    resp = MyApi.post "/auth/sign_in", #headers: headers,
     body: {
-      user: {
         email: @email,
         password: @password,
-        remember_me: 1
-          }
         }
     binding.pry
   end
 
   def signup
-    resp = MyApi.post "/users.json", #headers: headers,
+    resp = MyApi.post "/auth", #headers: headers,
     body: {
-      user: {
         email: @email,
         password: @password,
         password_confirmation: @password,
-        first_name: "David",
-        last_name: "Grayboff",
-        screen_name: "json"
-          }
+        first_name: "Robert",
+        last_name: "LaBlah",
+        screen_name: "boblablah"
         }
 
-    r = JSON.parse(resp.body)
     binding.pry
   end
 
@@ -51,7 +45,7 @@ end
 
 
 # print "What's your email? > "
-email = "jtjordan13@gmail.com"
+email = "bob@example.com"
 
 # print "What's your password? > "
 password = "hunter2"
