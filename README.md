@@ -3,7 +3,7 @@
 "Your Shows, Your Friends, On Your Time"
 
 ## To log in
-####POST "https://json-party.herokuapp.com/users/sign_in.json"
+####POST "https://wp-spoileralert.herokuapp.com/auth/sign_in"
 
 **request**
 
@@ -11,14 +11,16 @@ body:
 
 
 
-            user: {
-                  email: email,
-                  password: password
-                  }
+            {
+             email: email,
+             password: password
+            }
 
 
 
 **response**
+
+body:
 
 
 
@@ -32,14 +34,27 @@ body:
             "screen_name":"preteenwithapredatorhead",
             "location":nil,
             "first_name":"Brad",
-            "last_name":"Neely"
+            "last_name":"Neely",
+            "avatar": avatar url stuff
+          }
+
+header:
+
+
+
+          {
+            "access-token":["their-code"],
+            "token-type":["Bearer"],
+            "client"=>["client-code"],
+            "expiry"=>["epoc-till-expire"],
+            "uid"=>["something@example.com"]
           }
 
 
 
 
 ## To sign up
-####POST "https://json-party.herokuapp.com/users.json"
+####POST "https://wp-spoileralert.herokuapp.com/auth"
 
 **request**
 
@@ -47,19 +62,21 @@ body:
 
 
 
-          user: {
+              {
                 email: email,
                 password: password,
                 password_confirmation: password,
                 first_name: first,
                 last_name: last,
                 screen_name: sr
-                }
+              }
+
 
 
 
 **response**
 
+body:
 
 
           {
@@ -72,11 +89,27 @@ body:
             "screen_name":"preteenwithapredatorhead",
             "location":nil,
             "first_name":"Brad",
-            "last_name":"Neely"
+            "last_name":"Neely",
+            "avatar": avatar url stuff
           }
 
+
+
+header:
+
+
+
+          {
+            "access-token":["their-code"],
+            "token-type":["Bearer"],
+            "client"=>["client-code"],
+            "expiry"=>["epoc-till-expire"],
+            "uid"=>["something@example.com"]
+          }
+
+
 ## To update user
-####PATCH "https://json-party.herokuapp.com/users.json"
+####PATCH "https://wp-spoileralert.herokuapp.com/auth"
 
 **request**
 
@@ -115,5 +148,45 @@ email and current_password are required, everything else optional
           "screen_name":"preteenwithapredatorhead",
           "location":nil,
           "first_name":"Brad",
-          "last_name":"Neely"
+          "last_name":"Neely",
+          "avatar": avatar url stuff
         }
+
+
+## To get posts for an episode
+####GET "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
+
+**request**
+
+no additional info needed
+
+**response**
+
+
+
+        {
+          posts:
+              {
+                username:   "bob"
+                thumb_url:  "someamazonthing.com/picture.format"
+                timestamp:  "Time in EST"
+                content:    "this is what the person wrote"
+              }
+        }
+
+
+## To make a posts for an episode
+####POST "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
+
+**request**
+
+body:
+
+
+
+        content: "This is what I want to post"
+
+
+**response**
+
+ok
