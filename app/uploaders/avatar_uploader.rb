@@ -7,7 +7,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+    "https://s3.amazonaws.com/watch-party/uploads/fallback/" + [version_name, "default.png"].compact.join('_')
+    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   end
 
   # Choose what kind of storage to use for this uploader:
@@ -16,6 +17,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def content_type_whitelist
     /image\//
+  end
+
+  process resize_to_fit: [500, 500]
+
+  version :thumb do
+    process resize_to_fill: [200,200]
   end
 
   # Override the directory where uploaded files will be stored.
