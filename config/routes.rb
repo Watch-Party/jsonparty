@@ -7,9 +7,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :destroy]
 
-  resources :shows, except: [:new, :edit] do
-    resources :episodes, except: [:new, :edit], shallow: true do
-      resources :posts, except: [:new, :edit], shallow: true
-    end
-  end
+  # resources :shows, except: [:new, :edit] do
+  #   resources :episodes, except: [:new, :edit], shallow: true do
+  #     resources :posts, except: [:new, :edit], shallow: true
+  #   end
+  # end
+
+  get  '/:showname/:season/:episode/posts' => 'posts#index'
+  post '/:showname/:season/:episode/posts' => 'posts#create'
 end

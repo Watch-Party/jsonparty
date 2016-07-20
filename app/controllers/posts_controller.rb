@@ -5,13 +5,25 @@ class PostsController < ApplicationController
   end
 
   def index
-    @episode = Episode.find params[:id]
-    @posts = @episode.posts.all
+    show = Show.find_by(title: params[:showname])
+    episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
+    @posts = episode.posts.all.order(:created_at)
   end
 
   def create
-    @episode = Episode.find params[:id]
-    @posts = @episode.posts.new
+    current_user = User.last
+    show = Show.find_by(title: params[:showname])
+    episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
+    post = episode.posts.new(user: current_user, content: params[:content], time_in_episode: Time.now)
+    if post.save
+      respond_to do |format|
+        format.json { render json: { status: :ok} }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: "Unable to create post"} }
+      end
+    end
   end
 
   def update
