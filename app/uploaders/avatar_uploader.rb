@@ -22,7 +22,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [500, 500]
 
   version :thumb do
-    process resize_to_fill: [200,200]
+    process resize_to_fill: [35, 35]
   end
 
   # Override the directory where uploaded files will be stored.
