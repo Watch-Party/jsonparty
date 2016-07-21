@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   get  '/:showname/:season/:episode/posts' => 'posts#index'
   post '/:showname/:season/:episode/posts' => 'posts#create'
+  post '/:showname' => 'shows#create'
+  post '/:showname/confirm' => 'shows#confirm'
 end

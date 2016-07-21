@@ -12,6 +12,10 @@ class ShowsController < ApplicationController
 
   end
 
+  def confirm
+
+  end
+
   def update
     @show = Show.find params[:id]
   end
