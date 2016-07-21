@@ -17,7 +17,7 @@ class ShowsController < ApplicationController
     show = Show.find_by(tvrage_id: params[:tvrage_id])
     show.confirmed = true
     if show.save
-      episodes = EpisodeIndexer.new(show.tvrage_id)
+      episodes = EpisodeIndexer.new(show)
       episodes.index
       respond_to do |format|
         format.json { render json: { status: "Show Added!"} }
