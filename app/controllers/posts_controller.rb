@@ -11,7 +11,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    current_user = User.last
     show = Show.find_by(title: params[:showname])
     episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
     post = episode.posts.new(user: current_user, content: params[:content], time_in_episode: Time.now)
