@@ -76,36 +76,9 @@ body:
 
 **response**
 
-body:
+                  OK
 
-
-          {
-            "id":5,
-            "email":"something@example.com",
-            "created_at":"2016-07-18T21:35:19.926Z",
-            "updated_at":"2016-07-18T21:35:19.930Z",
-            "avatar_url":nil,
-            "bio":nil,
-            "screen_name":"preteenwithapredatorhead",
-            "location":nil,
-            "first_name":"Brad",
-            "last_name":"Neely",
-            "avatar": avatar url stuff
-          }
-
-
-
-header:
-
-
-
-          {
-            "access-token":["their-code"],
-            "token-type":["Bearer"],
-            "client"=>["client-code"],
-            "expiry"=>["epoc-till-expire"],
-            "uid"=>["something@example.com"]
-          }
+Will send confirmation email to user
 
 
 ## To update user
