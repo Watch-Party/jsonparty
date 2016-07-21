@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     show = Show.find_by(title: params[:showname])
     episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
-    @posts = episode.posts.all.order(:created_at)
+    @posts = episode.posts.all.order(:created_at).includes(:user)
   end
 
   def create
