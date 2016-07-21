@@ -15,7 +15,7 @@ module Jsonparty
         resource '*',
           :headers => :any,
           :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-          :methods => [:get, :post, :options, :delete, :put]
+          :methods => [:get, :post, :patch, :options, :delete, :put]
       end
     end
     # Settings in config/environments/* take precedence over those specified here.
