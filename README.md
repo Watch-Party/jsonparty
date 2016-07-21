@@ -1,5 +1,5 @@
 # Spoiler Alert!
-## The json API for Watch Party!
+## The REST json API for Watch Party!
 "Your Shows, Your Friends, On Your Time"
 
 ## To log in
