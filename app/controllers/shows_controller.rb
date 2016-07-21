@@ -9,7 +9,8 @@ class ShowsController < ApplicationController
   end
 
   def new
-    sfinder = ShowFinder.new params[:showname]
+    showname = params[:showname].gsub(/\_/," ")
+    sfinder = ShowFinder.new showname
     @shows = sfinder.options
   end
 
