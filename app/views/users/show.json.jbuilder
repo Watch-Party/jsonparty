@@ -7,4 +7,5 @@ json.user do
   json.location       @user.location
   json.avatar         @user.avatar.url
   json.avatar_thumb   @user.avatar.thumb.url
+  json.total_posts    @user.posts.count
 end
