@@ -51,4 +51,4 @@ email = "bob@example.com"
 password = "hunter2"
 
 api = MyApi.new email, password
-api.login
+api.signup
