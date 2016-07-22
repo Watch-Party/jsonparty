@@ -12,7 +12,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    show = Show.find_by(title: params[:showname])
+    showname = params[:showname].gsub(/\_/," ")
+    show = Show.find_by(title: showname)
     episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
     post = episode.posts.new(user: current_user, content: params[:content], time_in_episode: Time.now)
     if post.save
