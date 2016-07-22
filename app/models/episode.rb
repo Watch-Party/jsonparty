@@ -1,15 +1,23 @@
 class Episode < ApplicationRecord
 
-  validates_uniqueness_of :title, scope: :season
-  validates_uniqueness_of :air_date, scope: :season
+  validates_uniqueness_of :tvrage_e_id
+  validate :can_only_have_one_episode_number_per_season
 
   validates_presence_of :title,
                         :air_date,
                         :runtime,
                         :season,
-                        :episode_number
+                        :episode_number,
+                        :tvrage_e_id
 
   has_many :posts
   belongs_to :show
+
+  def can_only_have_one_episode_number_per_season
+    if self.show.episodes.find_by(season: self.season, episode_number: self.episode_number).present? &&
+        (self.episode_number != "special")
+      errors.add(:episode_number, "can't be duplicated in the same season")
+    end
+  end
 
 end
