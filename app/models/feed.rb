@@ -1,5 +1,5 @@
 class Feed < ApplicationRecord
   belongs_to :episode
   has_many :posts
-  has_many :users
+  has_many :users, through: :posts
 end

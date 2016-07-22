@@ -10,7 +10,8 @@ class Episode < ApplicationRecord
                         :episode_number,
                         :tvrage_e_id
 
-  has_many :posts
+  has_one :feed
+  has_many :posts, through: :feed
   belongs_to :show
 
   def can_only_have_one_episode_number_per_season
