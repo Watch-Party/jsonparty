@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
 
-  resources :feeds, param: :slug
+  resources :feeds
   resources :posts
 
   # devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
