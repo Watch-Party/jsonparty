@@ -71,3 +71,5 @@ gem 'fog-aws'
 gem 'rollbar'
 gem 'devise_token_auth', github: "lynndylanhurley/devise_token_auth"
 gem 'omniauth'
+gem 'actioncable'
+gem 'redis'
