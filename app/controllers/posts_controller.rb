@@ -12,14 +12,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    showname = params[:showname].gsub(/\_/," ")
-    show = Show.find_by(title: showname)
-    episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
-    post = episode.posts.new(user: current_user, content: params[:content], time_in_episode: Time.now)
+    post = Post.new(post_params)
+    post.time_in_episode = Time.now
+    post.user = current_user
     if post.save
-      respond_to do |format|
-        format.json { render json: { status: :ok} }
-      end
+      ActionCable.server.broadcast 'posts',
+        content:    post.content,
+        username:   post.user.screen_name,
+        thumb_url:  post.user.avatar.thumb.url,
+        timestamp:  (post.created_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")
+      head :ok
     else
       respond_to do |format|
         format.json { render json: { status: "Unable to create post"} }
@@ -37,5 +39,11 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.json { render json: { status: :ok} }
     end
+  end
+
+  private
+
+  def post_params
+    params.permit(:content, :feed_id)
   end
 end
