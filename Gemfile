@@ -73,3 +73,4 @@ gem 'devise_token_auth', github: "lynndylanhurley/devise_token_auth"
 gem 'omniauth'
 gem 'actioncable'
 gem 'redis'
+gem 'acts_as_votable'

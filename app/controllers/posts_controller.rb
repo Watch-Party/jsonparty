@@ -34,6 +34,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def pop
+    post = Post.find(params[:id])
+    post.upvote_by current_user
+  end
+
   def update
     @episode = Episode.find params[:id]
   end

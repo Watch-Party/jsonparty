@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root 'home#readme'
 
   resources :users, only: [:show, :destroy]
+  # resources :watches, only: [:create, :destroy]
 
   # resources :shows, except: [:new, :edit] do
   #   resources :episodes, except: [:new, :edit], shallow: true do
@@ -23,4 +24,7 @@ Rails.application.routes.draw do
   post '/:showname/:season/:episode/posts' => 'posts#create'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
+  post '/users/:id/watched' => 'watched#create'
+  delete '/users/:id/watched' => 'watched#destroy'
+  patch '/posts/:id/pop' => 'posts#pop'
 end
