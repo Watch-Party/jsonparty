@@ -7,4 +7,8 @@ class FeedsChannel < ApplicationCable::Channel
   def unsubscribed
     stop_all_streams
   end
+
+  def send
+    binding.pry
+  end
 end
