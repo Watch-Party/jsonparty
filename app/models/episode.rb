@@ -10,7 +10,7 @@ class Episode < ApplicationRecord
                         :episode_number,
                         :tvrage_e_id
 
-  has_one :feed
+  has_many :feeds
   has_many :posts, through: :feed
   belongs_to :show
 
