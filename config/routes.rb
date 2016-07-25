@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   resources :feeds
-  resources :posts
 
   # devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -20,8 +19,8 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  # get  '/:showname/:season/:episode/posts' => 'posts#index'
-  # post '/:showname/:season/:episode/posts' => 'posts#create'
+  get  '/:showname/:season/:episode/posts' => 'posts#index'
+  post '/:showname/:season/:episode/posts' => 'posts#create'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
 end
