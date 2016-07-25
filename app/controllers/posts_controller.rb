@@ -5,10 +5,11 @@ class PostsController < ApplicationController
   end
 
   def index
+    feed = Feed.first
     showname = params[:showname].gsub(/\_/," ")
     show = Show.find_by(title: showname)
     episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
-    @posts = episode.posts.all.order(:created_at).includes(:user)
+    @posts = feed.posts.all.order(:created_at).includes(:user)
   end
 
   def create
