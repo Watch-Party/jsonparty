@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   post '/:showname/:season/:episode/posts' => 'posts#create'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
-  post '/users/:id/watched' => 'watched#create'
-  delete '/users/:id/watched' => 'watched#destroy'
+  post '/watch/:id/' => 'watched#create'
+  delete '/watch/:id/' => 'watched#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
 end

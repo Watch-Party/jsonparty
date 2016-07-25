@@ -100,11 +100,13 @@ body:
                 screen_name: sr,
                 bio: bio,
                 location: location,
-                avatar: img_file
+                avatar: img_file,
+                remote_avatar_url: img_url
               }
 
 
-email and current_password are required, everything else optional
+only need avatar file or remote_avatar_url, not both
+only need fields that are being changed
 
 
 **response**
@@ -140,10 +142,12 @@ no additional info needed
         {
           posts:
               {
+                id:         8907
                 username:   "bob"
                 thumb_url:  "someamazonthing.com/picture.format"
                 timestamp:  "Time in EST"
                 content:    "this is what the person wrote"
+                pops:       5
               }
         }
 
@@ -213,3 +217,35 @@ no additional info needed
                 or
 
                 status: "Unable to add show"
+
+
+## To watch user
+####POST "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+
+**request**
+
+no additional info needed
+
+**response**
+
+                status: "Success"
+
+                or
+
+                status: "Unable to watch that user"
+
+
+## To UNwatch user
+####DELETE "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+
+**request**
+
+no additional info needed
+
+**response**
+
+                status: "Success"
+
+                or
+
+                status: "Unable to unwatch"

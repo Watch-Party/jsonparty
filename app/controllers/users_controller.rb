@@ -11,4 +11,5 @@ class UsersController < ApplicationController
       format.json { render json: { status: :ok} }
     end
   end
+
 end
