@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :shows
   has_many :posts
   has_many :feeds, through: :posts
+  has_many :comments
 
   has_many :watchers, through: :watcher_watches, source: :watcher
   has_many :watcher_watches, foreign_key: :watched_id, class_name: 'Watch'
