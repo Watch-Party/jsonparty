@@ -249,3 +249,19 @@ no additional info needed
                 or
 
                 status: "Unable to unwatch"
+
+
+
+## To pop a post
+####PATCH "https://wp-spoileralert.herokuapp.com/posts/:post_id/pop"
+
+**request**
+
+no additional info needed
+
+**response**
+
+                status: "Post Popped"
+
+
+![alt text](https://camo.githubusercontent.com/e5d6d8ad9289c10a7c8eaa19a0886b757ac2331f/68747470733a2f2f7261776769742e636f6d2f616e67756c61722d616374696f6e6361626c652f616e67756c61722d616374696f6e6361626c652f623661636237303432613339373936613766666139353130353331343561343531643030623862622f696d616765732f67656d73746f6e655f737570706f727465645f62795f747261636b732e706e67 "rails image 1")
