@@ -37,6 +37,9 @@ class PostsController < ApplicationController
   def pop
     post = Post.find(params[:id])
     post.upvote_by current_user
+    respond_to do |format|
+      format.json { render json: { status: "Post Popped"} }
+    end
   end
 
   def update
