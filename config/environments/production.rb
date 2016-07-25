@@ -1,6 +1,6 @@
 Rails.application.configure do
 
-  config.web_socket_server_url = "wss://wp-spoileralert.herokuapp.com/cable"
+  config.web_socket_server_url = "ws://wp-spoileralert.herokuapp.com/cable"
   config.action_cable.allowed_request_origins = ['https://watch-party.firebaseapp.com', 'http://watch-party.firebaseapp.com']
 
   config.action_mailer.default_url_options = { :host => 'wp-spoileralert.heroku.com' }
