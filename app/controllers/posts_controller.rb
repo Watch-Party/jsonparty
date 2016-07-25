@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     show = Show.find_by(title: showname)
     episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
     @posts = episode.posts.all.order(:created_at).includes(:user)
-    post = feed.posts.new(:content params[:content])
+    post = feed.posts.new(content: params[:content])
     post.time_in_episode = Time.now
     post.user = current_user
     if post.save
