@@ -3,7 +3,9 @@ class FeedsChannel < ApplicationCable::Channel
     show = params["data"].first["show"]
     season = params["data"].first["season"]
     episode = params["data"].first["episode"]
+
     stop_all_streams
+
     stream_from "#{show}:s#{season}:e#{episode}"
   end
 
@@ -19,7 +21,7 @@ class FeedsChannel < ApplicationCable::Channel
     content = data["message"]["content"]
 
     user = User.find params["data"].last["user_id"]
-    
+
     feed = Feed.first
 
     post = feed.posts.new(
