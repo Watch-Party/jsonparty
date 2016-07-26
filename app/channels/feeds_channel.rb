@@ -15,22 +15,20 @@ class FeedsChannel < ApplicationCable::Channel
     show = params["data"].first["show"]
     season = params["data"].first["season"]
     episode = params["data"].first["episode"]
+
     content = data["message"]["content"]
+
     user = User.find params["data"].last["user_id"]
+    
     feed = Feed.first
 
     post = feed.posts.new(
                           content: content,
                           time_in_episode: Time.now - feed.episode.air_date,
-                          user: user
+                          user: user,
+                          feed_name: "#{show}:s#{season}:e#{episode}"
                           )
     post.save
 
-
-    ActionCable.server.broadcast "#{show}:s#{season}:e#{episode}",
-      content:    post.content,
-      username:   post.user.screen_name,
-      thumb_url:  post.user.avatar.thumb.url,
-      timestamp:  Time.at(post.time_in_episode).utc.strftime("%M:%S")
   end
 end
