@@ -74,3 +74,5 @@ gem 'omniauth'
 gem 'actioncable'
 gem 'redis'
 gem 'acts_as_votable'
+gem 'sidekiq'
+# gem 'sinatra', github: 'sinatra/sinatra', :require => false
