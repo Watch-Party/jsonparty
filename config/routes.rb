@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   # end
 
   get  '/:showname/:season/:episode/posts' => 'posts#index'
-  post '/:showname/:season/:episode/posts' => 'posts#create'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
   post '/watch/:id/' => 'watched#create'
