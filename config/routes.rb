@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   patch '/posts/:id/pop' => 'posts#pop'
 
   require 'sidekiq/web'
+  Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
+  Sidekiq::Web.set :protection, except: :content_security_policy
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
   mount Sidekiq::Web => '/sidekiq'
 end
