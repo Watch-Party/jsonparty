@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   delete '/watch/:id/' => 'watched#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
 
-  # require 'sidekiq/web'
-  # Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
-  # mount Sidekiq::Web => '/sidekiq'
+  require 'sidekiq/web'
+  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+  mount Sidekiq::Web => '/sidekiq'
 end

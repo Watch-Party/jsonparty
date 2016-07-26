@@ -7,6 +7,16 @@ GIT
       rails (< 6)
 
 GIT
+  remote: git://github.com/mperham/sidekiq.git
+  revision: 9e390bf37b3b121dc3880e6589243a48705a2c6e
+  specs:
+    sidekiq (4.1.4)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
+      sinatra (>= 1.4.7)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 6720f93d2c54904f10b6e6d6beb51d0b5b330976
   specs:
@@ -16,6 +26,23 @@ GIT
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: git://github.com/sinatra/rack-protection.git
+  revision: bce9100cf9e95776cfcccf884aaf5523a4aab1c5
+  specs:
+    rack-protection (2.0.0)
+      rack
+
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: d4b8cc5d24e00d6351ddc9f1ab405e55795211a1
+  specs:
+    sinatra (2.0.0.pre.alpha)
+      mustermann (~> 0.4)
+      rack (~> 2.0)
+      rack-protection (~> 2.0)
+      tilt (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -158,6 +185,8 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     multi_xml (0.5.5)
+    mustermann (0.4.0)
+      tool (~> 0.2)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -227,10 +256,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sidekiq (4.1.2)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
-      redis (~> 3.2, >= 3.2.1)
     slop (3.6.0)
     spring (1.7.2)
     spring-watcher-listen (2.0.0)
@@ -246,6 +271,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    tool (0.2.3)
     turbolinks (5.0.0)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -300,13 +326,15 @@ DEPENDENCIES
   puma (~> 3.0)
   pundit
   rack-cors
+  rack-protection!
   rails (~> 5.0.0)
   rails-erd
   redcarpet
   redis
   rollbar
   sass-rails (~> 5.0)
-  sidekiq
+  sidekiq!
+  sinatra!
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
