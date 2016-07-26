@@ -14,18 +14,4 @@ class PostsController < ApplicationController
       format.json { render json: { status: "Post Popped"} }
     end
   end
-
-  def destroy
-    @post = Post.find params[:id]
-    @post.destroy
-    respond_to do |format|
-      format.json { render json: { status: :ok} }
-    end
-  end
-
-  private
-
-  def post_params
-    params.permit(:content, :feed_id)
-  end
 end
