@@ -22,7 +22,7 @@ class EpisodeIndexer
                         )
       epi.save!
 
-      epi.feeds.create!(type: "live",
+      epi.feeds.create!(species: "live",
                         start_time: epi.air_date,
                         name: "live"
                         )
