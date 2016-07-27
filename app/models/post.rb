@@ -3,8 +3,7 @@ class Post < ApplicationRecord
   acts_as_votable
 
   validates_presence_of :content,
-                        :time_in_episode,
-                        :feed_name
+                        :time_in_episode
 
   belongs_to :user
   belongs_to :feed

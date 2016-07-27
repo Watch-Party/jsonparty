@@ -6,7 +6,11 @@ class FeedsChannel < ApplicationCable::Channel
 
     stop_all_streams
 
-    stream_from "#{show}:s#{season}:e#{episode}"
+    show = Show.find_by(title: show)
+    episode = show.episodes.find_by(season: season, episode_number: episode)
+    feed = episode.feeds.find_by(name: "live")
+
+    stream_from "#{feed.id}"
   end
 
   def unsubscribed
@@ -22,13 +26,14 @@ class FeedsChannel < ApplicationCable::Channel
 
     user = User.find params["data"].last["user_id"]
 
-    feed = Feed.first
+    show = Show.find_by(title: show)
+    episode = show.episodes.find_by(season: season, episode_number: episode)
+    feed = episode.feeds.find_by(name: "live")
 
     post = feed.posts.new(
                           content: content,
-                          time_in_episode: Time.now - feed.episode.air_date,
-                          user: user,
-                          feed_name: "#{show}:s#{season}:e#{episode}"
+                          time_in_episode: Time.now - feed.start_time,
+                          user: user
                           )
     post.save
 
