@@ -6,8 +6,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   include PgSearch
-  multisearchable :against => :screen_name
-  multisearchable :against =>  :email
+  multisearchable :against => [:screen_name, :email]
+  
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
