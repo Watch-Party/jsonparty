@@ -94,7 +94,9 @@ body:
               }
 
 
-only need avatar file or remote_avatar_url, not both
+only need avatar file or remote avatar url, not both
+
+
 only need fields that are being changed
 
 
@@ -141,21 +143,6 @@ no additional info needed
         }
 
 
-## To make a posts for an episode
-####POST "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
-
-**request**
-
-body:
-
-
-
-        content: "This is what I want to post"
-
-
-**response**
-
-ok
 
 
 ## To get show options based on show name
@@ -252,6 +239,44 @@ no additional info needed
 
                 status: "Post Popped"
 
+
+
+
+## To search for user or show by title or email
+####GET 'https://wp-spoileralert.herokuapp.com/search?criteria="thing to search for"'
+
+**request**
+
+no additional info needed
+
+**response**
+
+            {
+            results: [
+                  {
+                      username: "boblablah",
+                      email: "bob@example.com",
+                      type: "User",
+                      id: 1
+                  }
+              ]
+            }
+
+
+or
+
+
+            {
+            results: [
+                  {
+                    showname: "futurama",
+                    type: "Show",
+                    id: 72
+                  }
+              ]
+            }
+
+or a combination of both
 
 
 ##Is it any good?
