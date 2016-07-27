@@ -7,4 +7,4 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:7eb0545f6b8f9d2e59fe908164890fac@catfish.redistogo.com:10336/
+  url: <%= ENV["REDISTOGO_URL"] %>
