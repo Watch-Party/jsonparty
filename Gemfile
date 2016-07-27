@@ -77,3 +77,4 @@ gem 'acts_as_votable'
 gem 'sidekiq', github: 'mperham/sidekiq'
 gem "rack-protection", github: "sinatra/rack-protection"
 gem 'sinatra', github: 'sinatra', :require => false
+gem 'pg_search'

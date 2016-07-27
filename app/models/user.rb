@@ -5,6 +5,9 @@ class User < ApplicationRecord
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  include PgSearch
+  multisearchable :against => [:screen_name, :email]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,

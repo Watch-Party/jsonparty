@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post '/watch/:id/' => 'watched#create'
   delete '/watch/:id/' => 'watched#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
+  get '/search' => 'search#search'
 
   require 'sidekiq/web'
   Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
