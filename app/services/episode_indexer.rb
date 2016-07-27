@@ -47,6 +47,11 @@ class EpisodeIndexer
                           tvrage_e_id: e["id"]
                           )
         epi.save!
+
+        epi.feeds.create!(species: "live",
+                          start_time: epi.air_date,
+                          name: "live"
+                          )
       end
     end
   end
