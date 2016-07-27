@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   include PgSearch
   multisearchable :against => [:screen_name, :email]
-  
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
