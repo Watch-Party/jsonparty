@@ -30,6 +30,10 @@ class ShowsController < ApplicationController
     end
   end
 
+  def recent
+    @shows = (Post.where(user: current_user)).map {|p| p.show }.uniq
+  end
+
   def update
     @show = Show.find params[:id]
   end

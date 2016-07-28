@@ -9,6 +9,9 @@ class Post < ApplicationRecord
   belongs_to :feed
   has_many :comments
 
+  delegate :episode, :to => :feed, :allow_nil => true
+  delegate :show, :to => :episode, :allow_nil => true
+
   after_create_commit { PostBroadcastWorker.perform_async self.id }
 
 end
