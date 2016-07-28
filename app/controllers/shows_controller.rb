@@ -17,6 +17,8 @@ class ShowsController < ApplicationController
   def create
     show = Show.find_by(tvrage_id: params[:tvrage_id])
     show.confirmed = true
+    sfinder = SeasonsFinder.new show
+    show.seasons = sfinder.seasons
     if show.save
       episodes = EpisodeIndexer.new(show)
       episodes.index
@@ -31,7 +33,7 @@ class ShowsController < ApplicationController
   end
 
   def recent
-    @shows = (Post.where(user: current_user)).map {|p| p.show }.uniq
+    @shows = (Post.where(user_id: params[:id]).includes(:feed)).map {|p| p.show }.uniq
   end
 
   def update
