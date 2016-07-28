@@ -9,6 +9,10 @@ class EpisodesController < ApplicationController
     @episodes = @show.episodes.all
   end
 
+  def upcoming
+    @episodes = Episode.where(:air_date => Time.now..2.days.from_now)
+  end
+
   def create
     @show = Show.find params[:id]
     @episode = @show.episodes.new

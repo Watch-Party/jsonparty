@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   delete '/watch/:id/' => 'watches#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
   get '/search' => 'search#search'
-  get '/upcoming' => 'temp#temp'# TODO:
+  get '/upcoming' => 'episodes#upcoming'
   get '/recent/:id' => 'temp#temp'# TODO:
 
   require 'sidekiq/web'
