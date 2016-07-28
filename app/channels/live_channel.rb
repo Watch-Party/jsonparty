@@ -1,8 +1,8 @@
 class LiveChannel < ApplicationCable::Channel
   def subscribed
-    show = params["data"].first["show"]
-    season = params["data"].first["season"]
-    episode = params["data"].first["episode"]
+    show = params["data"][0]["show"]
+    season = params["data"][0]["season"]
+    episode = params["data"][0]["episode"]
 
     stop_all_streams
 
@@ -18,13 +18,13 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    show = params["data"].first["show"]
-    season = params["data"].first["season"]
-    episode = params["data"].first["episode"]
+    show = params["data"][0]["show"]
+    season = params["data"][0]["season"]
+    episode = params["data"][0]["episode"]
 
     content = data["message"]["content"]
 
-    user = User.find params["data"].last["user_id"]
+    user = User.find params["data"][1]["user_id"]
 
     show = Show.find_by(title: show)
     episode = show.episodes.find_by(season: season, episode_number: episode)
@@ -40,7 +40,7 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def pop(data)
-    user = User.find params["data"].last["user_id"]
+    user = User.find params["data"][1]["user_id"]
 
     post = Post.find(data["message"]["post_id"])
     post.upvote_by user
@@ -49,8 +49,19 @@ class LiveChannel < ApplicationCable::Channel
 
   end
 
+  def ping
+    show = params["data"][0]["show"]
+    season = params["data"][0]["season"]
+    episode = params["data"][0]["episode"]
+
+    feed = episode.feeds.find_by(name: "live")
+
+    ActionCable.server.broadcast "#{feed.id}",
+    pong: "#{current_user.screen_name}"
+  end
+
   def comment(data)
-    user = User.find params["data"].last["user_id"]
+    user = User.find params["data"][1]["user_id"]
 
     post = Post.find(data["message"]["id"])
 
