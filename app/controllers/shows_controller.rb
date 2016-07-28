@@ -33,7 +33,7 @@ class ShowsController < ApplicationController
   end
 
   def recent
-    @shows = (Post.where(user_id: params[:id]).includes(:feed)).map {|p| p.show }.uniq
+    @shows = (Post.where(user: current_user).includes(:feed)).map {|p| p.show }.uniq
   end
 
   def update

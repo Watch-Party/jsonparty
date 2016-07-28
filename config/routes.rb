@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   patch '/posts/:id/pop' => 'posts#pop'
   get '/search' => 'search#search'
   get '/upcoming' => 'episodes#upcoming'
-  get '/recent/:id' => 'shows#recent'
+  get '/recent' => 'shows#recent'
 
   require 'sidekiq/web'
   Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
