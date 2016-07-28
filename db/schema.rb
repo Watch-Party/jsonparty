@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728180922) do
+ActiveRecord::Schema.define(version: 20160728194537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,12 +69,14 @@ ActiveRecord::Schema.define(version: 20160728180922) do
   end
 
   create_table "shows", force: :cascade do |t|
-    t.string  "title"
-    t.string  "cover_img_url"
-    t.text    "summary"
-    t.boolean "confirmed",     default: false
-    t.integer "tvrage_id"
-    t.integer "seasons"
+    t.string   "title"
+    t.string   "cover_img_url"
+    t.text     "summary"
+    t.boolean  "confirmed",     default: false
+    t.integer  "tvrage_id"
+    t.integer  "seasons"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "shows_users", force: :cascade do |t|
