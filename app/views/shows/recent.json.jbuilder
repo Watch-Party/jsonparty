@@ -1,4 +1,5 @@
 json.recent_shows @shows do |show|
+  require 'pry'
   binding.pry
   json.title      show.title
   json.seasons (1..show.seasons) do |season|
