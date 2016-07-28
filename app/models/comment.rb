@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
 
-  validates_presence_of :content
+  validates_presence_of :content,
+                        :time_in_episode
 
   belongs_to :post
   belongs_to :user
