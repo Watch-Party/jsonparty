@@ -54,6 +54,8 @@ class LiveChannel < ApplicationCable::Channel
     season = params["data"][0]["season"]
     episode = params["data"][0]["episode"]
 
+    show = Show.find_by(title: show)
+    episode = show.episodes.find_by(season: season, episode_number: episode)
     feed = episode.feeds.find_by(name: "live")
 
     ActionCable.server.broadcast "#{feed.id}",
