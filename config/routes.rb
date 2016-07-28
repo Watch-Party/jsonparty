@@ -21,12 +21,15 @@ Rails.application.routes.draw do
   # end
 
   get  '/:showname/:season/:episode/posts' => 'posts#index'
+  get '/:showname/:season/:episode/' => # TODO:
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
   post '/watch/:id/' => 'watches#create'
   delete '/watch/:id/' => 'watches#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
   get '/search' => 'search#search'
+  get '/upcoming' => # TODO:
+  get '/recent/:id' => # TODO: 
 
   require 'sidekiq/web'
   Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
