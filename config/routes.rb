@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   get  '/:showname/:season/:episode/posts' => 'posts#index'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
-  post '/watch/:id/' => 'watched#create'
-  delete '/watch/:id/' => 'watched#destroy'
+  post '/watch/:id/' => 'watches#create'
+  delete '/watch/:id/' => 'watches#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
   get '/search' => 'search#search'
 
