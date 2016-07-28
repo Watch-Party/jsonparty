@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post '/watch/:id/' => 'watches#create'
   delete '/watch/:id/' => 'watches#destroy'
   patch '/posts/:id/pop' => 'posts#pop'
+  get '/search/init' => 'search#init'
   get '/search' => 'search#search'
   get '/upcoming' => 'episodes#upcoming'
   get '/recent' => 'shows#recent'
