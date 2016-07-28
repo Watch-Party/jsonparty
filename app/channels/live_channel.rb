@@ -42,10 +42,10 @@ class LiveChannel < ApplicationCable::Channel
   def pop(data)
     user = User.find params["data"].last["user_id"]
 
-    post = Post.find(data["message"]["id"])
+    post = Post.find(data["message"]["post_id"])
     post.upvote_by user
 
-    PopBroadcastWoker.perform_async post.id, user.id
+    PopBroadcastWorker.perform_async post.id, user.id
 
   end
 
