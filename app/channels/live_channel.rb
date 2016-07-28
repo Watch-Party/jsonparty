@@ -49,7 +49,7 @@ class LiveChannel < ApplicationCable::Channel
 
   end
 
-  def ping
+  def ping(data)
     show = params["data"][0]["show"]
     season = params["data"][0]["season"]
     episode = params["data"][0]["episode"]
