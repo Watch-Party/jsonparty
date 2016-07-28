@@ -7,11 +7,4 @@ class PostsController < ApplicationController
     @posts = episode.posts.where("time_in_episode <= ?", 0).order(:time_in_episode).includes(:user)
   end
 
-  def pop
-    post = Post.find(params[:id])
-    post.upvote_by current_user
-    respond_to do |format|
-      format.json { render json: { status: "Post Popped"} }
-    end
-  end
 end
