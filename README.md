@@ -282,6 +282,7 @@ or a combination of both
 ##Is it any good?
 [Yes](http://news.ycombinator.com/item?id=3067434)
 
-![alt text](https://camo.githubusercontent.com/e5d6d8ad9289c10a7c8eaa19a0886b757ac2331f/68747470733a2f2f7261776769742e636f6d2f616e67756c61722d616374696f6e6361626c652f616e67756c61722d616374696f6e6361626c652f623661636237303432613339373936613766666139353130353331343561343531643030623862622f696d616765732f67656d73746f6e655f737570706f727465645f62795f747261636b732e706e67 "Ruby on Rails")
-![alt text](https://spinspire.com/sites/spinspire.com/files/field/image/rest_api_256x256.png "REST API")
-![alt text](http://zappysys.com/images/tech/json-logo.png "JSON")
+##A Thanks To...
+[TVMAZE-API](http://www.tvmaze.com/api): An api for tv shows and their episodes
+
+.
