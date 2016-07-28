@@ -3,11 +3,25 @@ class DelayedChannel < ApplicationCable::Channel
     show = params["data"].first["show"]
     season = params["data"].first["season"]
     episode = params["data"].first["episode"]
-    user_id = params["data"].last["user_id"]
+
+    user = User.find params["data"].last["user_id"]
 
     stop_all_streams
 
-    stream_from "#{show}:s#{season}:e#{episode}:u#{user_id}"
+    show = Show.find_by(title: show)
+    episode = show.episodes.find_by(season: season, episode_number: episode)
+
+    feed = episode.feeds.new(
+                            species: "delayed",
+                            start_time: Time.now,
+                            name: "#{episode.id}:#{user.id}"
+                            )
+
+    stream_from "#{feed.id}"
+
+    df = DelayedFeed.new feed
+    df.start
+
   end
 
   def unsubscribed
@@ -23,13 +37,12 @@ class DelayedChannel < ApplicationCable::Channel
 
     user = User.find params["data"].last["user_id"]
 
-    feed = Feed.first
+    feed = episode.feeds.where(name: "#{episode.id}:#{user.id}").last
 
     post = feed.posts.new(
                           content: content,
-                          time_in_episode: Time.now - feed.episode.air_date,
-                          user: user,
-                          feed_name: "#{show}:s#{season}:e#{episode}:u#{user.id}"
+                          time_in_episode: Time.now - feed.start_time,
+                          user: user
                           )
     post.save
 

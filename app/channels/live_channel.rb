@@ -1,4 +1,4 @@
-class FeedsChannel < ApplicationCable::Channel
+class LiveChannel < ApplicationCable::Channel
   def subscribed
     show = params["data"].first["show"]
     season = params["data"].first["season"]
