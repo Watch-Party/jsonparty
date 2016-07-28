@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728162029) do
+ActiveRecord::Schema.define(version: 20160728180922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160728162029) do
     t.text    "summary"
     t.boolean "confirmed",     default: false
     t.integer "tvrage_id"
+    t.integer "seasons"
   end
 
   create_table "shows_users", force: :cascade do |t|
