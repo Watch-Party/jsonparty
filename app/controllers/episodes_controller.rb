@@ -13,6 +13,15 @@ class EpisodesController < ApplicationController
     @episodes = Episode.where(:air_date => Time.now..2.days.from_now)
   end
 
+  def get_id
+    showname = params[:showname].gsub(/\_/," ")
+    show = Show.find_by(title: showname)
+    episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
+    respond_to do |format|
+      format.json { render json: { episode_id: episode.id} }
+    end
+  end
+
   def create
     @show = Show.find params[:id]
     @episode = @show.episodes.new
