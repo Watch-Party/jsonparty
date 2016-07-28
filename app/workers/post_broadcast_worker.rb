@@ -9,5 +9,6 @@ class PostBroadcastWorker
       username:   post.user.screen_name,
       thumb_url:  post.user.avatar.thumb.url,
       timestamp:  Time.at(post.time_in_episode).utc.strftime("%M:%S")
+      pops:       post.get_upvotes.size
   end
 end
