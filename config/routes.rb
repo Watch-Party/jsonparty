@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   # end
 
   get  '/:showname/:season/:episode/posts' => 'posts#index'
-  get '/:showname/:season/:episode/' => 'episodes#get_id'# TODO:
+  get '/:showname/:season/:episode/' => 'episodes#get_id'
   get '/:showname/new' => 'shows#new'
   post '/:tvrage_id/confirm' => 'shows#create'
   post '/watch/:id/' => 'watches#create'
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   patch '/posts/:id/pop' => 'posts#pop'
   get '/search' => 'search#search'
   get '/upcoming' => 'episodes#upcoming'
-  get '/recent/:id' => 'temp#temp'# TODO:
+  get '/recent/:id' => 'shows#recent'
 
   require 'sidekiq/web'
   Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
