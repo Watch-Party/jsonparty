@@ -11,14 +11,14 @@ class CommentBroadcastWorker
       thumb_url:  post.user.avatar.thumb.url,
       timestamp:  Time.at(post.time_in_episode).utc.strftime("%M:%S"),
       pops:       post.get_upvotes.size,
-      comments:   [
+      comments:   
                   post.comments.where("time_in_episode <= ?", comment.time_in_episode).each do |c|
-                    comment_id:   c.id,
+                    {comment_id:   c.id,
                     content:      c.content,
                     username:     c.user.screen_name,
                     thumb_url:    c.user.avatar.thumb.url,
-                    timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")
+                    timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}
                   end
-                  ]
+
   end
 end
