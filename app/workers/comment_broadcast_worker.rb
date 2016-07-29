@@ -1,15 +1,11 @@
 class CommentBroadcastWorker
   include Sidekiq::Worker
 
-  def perform(new_comment_time_in_episode)
+  def perform(comment_id)
+    comment = Comment.find comment_id
     post = comment.post
 
-    comments = post.comments.where("time_in_episode <= ?", new_comment_time_in_episode).includes(:user).map {|c|
-      {comment_id:  c.id,
-      content:      c.content,
-      username:     c.user.screen_name,
-      thumb_url:    c.user.avatar.thumb.url,
-      timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}}
+    comments = find_comments(comment, post)
 
     ActionCable.server.broadcast "#{post.feed_id}",
       post_id:    post.id,
@@ -20,5 +16,14 @@ class CommentBroadcastWorker
       pops:       post.get_upvotes.size,
       comments:   comments
 
+  end
+
+  def find_comments(comment, post)
+    post.comments.where("time_in_episode <= ?", comment.time_in_episode).includes(:user).map {|c|
+      {comment_id:  c.id,
+      content:      c.content,
+      username:     c.user.screen_name,
+      thumb_url:    c.user.avatar.thumb.url,
+      timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}}
   end
 end
