@@ -1,11 +1,10 @@
 class CommentBroadcastWorker
   include Sidekiq::Worker
 
-  def perform(comment_id)
-    comment = Comment.find comment_id
+  def perform(new_comment_time_in_episode)
     post = comment.post
 
-    comments = post.comments.where("time_in_episode <= ?", comment.time_in_episode).includes(:user).map {|c|
+    comments = post.comments.where("time_in_episode <= ?", new_comment_time_in_episode).includes(:user).map {|c|
       {comment_id:  c.id,
       content:      c.content,
       username:     c.user.screen_name,
