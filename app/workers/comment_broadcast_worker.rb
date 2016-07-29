@@ -5,8 +5,8 @@ class CommentBroadcastWorker
     comment = Comment.find comment_id
     post = comment.post
 
-    comments = post.comments.where("time_in_episode <= ?", comment.time_in_episode).map {|c|
-      {comment_id:   c.id,
+    comments = post.comments.where("time_in_episode <= ?", comment.time_in_episode).includes(:user).map {|c|
+      {comment_id:  c.id,
       content:      c.content,
       username:     c.user.screen_name,
       thumb_url:    c.user.avatar.thumb.url,
