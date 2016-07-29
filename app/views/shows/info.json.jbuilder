@@ -4,6 +4,7 @@ json.show do
   json.img_url      @show.cover_img_url
   json.seasons      @show.seasons
   json.description  @show.summary
+  json.network      @show.network
 
   if @upcoming.present?
     json.upcoming_title    @upcoming.title
