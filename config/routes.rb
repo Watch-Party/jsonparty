@@ -11,6 +11,12 @@ Rails.application.routes.draw do
 
   root 'home#readme'
 
+  require 'sidekiq/web'
+  Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
+  Sidekiq::Web.set :protection, except: :content_security_policy
+  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :users, only: [:show, :destroy]
   # resources :watches, only: [:create, :destroy]
 
@@ -32,9 +38,4 @@ Rails.application.routes.draw do
   get '/upcoming' => 'episodes#upcoming'
   get '/recent' => 'shows#recent'
 
-  require 'sidekiq/web'
-  Sidekiq::Web.instance_variable_get(:@middleware).delete_if { |klass,_,_| klass == Rack::Protection }
-  Sidekiq::Web.set :protection, except: :content_security_policy
-  Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
-  mount Sidekiq::Web => '/sidekiq'
 end
