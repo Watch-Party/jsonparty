@@ -65,7 +65,7 @@ class LiveChannel < ApplicationCable::Channel
   def comment(data)
     user = User.find params["data"][1]["user_id"]
 
-    post = Post.find(data["message"]["id"])
+    post = Post.find(data["message"]["post_id"])
 
     content = data["message"]["content"]
 
