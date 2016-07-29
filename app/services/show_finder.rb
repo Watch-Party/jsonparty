@@ -14,10 +14,11 @@ class ShowFinder
         img_url = 'https://s3.amazonaws.com/watch-party/uploads/fallback/image-not-found.png'
       end
       option = Show.new(
-              title: s["show"]["name"].downcase,
-              cover_img_url: img_url,
-              summary: s["show"]["summary"],
-              tvrage_id: s["show"]["id"]
+              title:          s["show"]["name"].downcase,
+              cover_img_url:  img_url,
+              summary:        s["show"]["summary"],
+              tvrage_id:      s["show"]["id"],
+              network:        s["show"]["network"]["name"]
               )
       option.save
       shows.push option
