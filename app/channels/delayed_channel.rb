@@ -1,10 +1,12 @@
 class DelayedChannel < ApplicationCable::Channel
   def subscribed
-    show = params["data"].first["show"]
-    season = params["data"].first["season"]
-    episode = params["data"].first["episode"]
+    show = params["data"][0]["show"]
+    season = params["data"][0]["season"]
+    episode = params["data"][0]["episode"]
 
-    user = User.find params["data"].last["user_id"]
+    user = User.find params["data"][1]["user_id"]
+
+    viewtype = params["data"][2]["viewtype"]
 
     stop_all_streams
 
@@ -19,7 +21,7 @@ class DelayedChannel < ApplicationCable::Channel
 
     stream_from "#{feed.id}"
 
-    df = DelayedFeed.new feed
+    df = DelayedFeed.new feed viewtype user
     df.start
 
   end
@@ -29,13 +31,13 @@ class DelayedChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    show = params["data"].first["show"]
-    season = params["data"].first["season"]
-    episode = params["data"].first["episode"]
+    show = params["data"][0]["show"]
+    season = params["data"][0]["season"]
+    episode = params["data"][0]["episode"]
 
     content = data["message"]["content"]
 
-    user = User.find params["data"].last["user_id"]
+    user = User.find params["data"][1]["user_id"]
 
     feed = episode.feeds.where(name: "#{episode.id}:#{user.id}").last
 
