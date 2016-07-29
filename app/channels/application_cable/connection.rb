@@ -1,8 +1,9 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :current_user
+    # identified_by :current_user
 
     # def connect
+    #   binding.pry
     #   self.current_user = find_verified_user
     # end
     #
