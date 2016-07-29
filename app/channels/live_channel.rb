@@ -71,7 +71,8 @@ class LiveChannel < ApplicationCable::Channel
 
     comment = post.comments.new(
                                 content: content,
-                                user: user
+                                user: user,
+                                time_in_episode: Time.now - feed.start_time
                                 )
     comment.save
 
