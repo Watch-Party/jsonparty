@@ -4,8 +4,6 @@ class LiveChannel < ApplicationCable::Channel
     season = params["data"][0]["season"]
     episode = params["data"][0]["episode"]
 
-    connection_store[:current_user_id] = params["data"][1]["user_id"]
-
     stop_all_streams
 
     show = Show.find_by(title: show)
@@ -26,6 +24,8 @@ class LiveChannel < ApplicationCable::Channel
 
     content = data["message"]["content"]
 
+    user = User.find params["data"][1]["user_id"]
+
     show = Show.find_by(title: show)
     episode = show.episodes.find_by(season: season, episode_number: episode)
     feed = episode.feeds.find_by(name: "live")
@@ -33,17 +33,19 @@ class LiveChannel < ApplicationCable::Channel
     post = feed.posts.new(
                           content: content,
                           time_in_episode: Time.now - feed.start_time,
-                          user_id: connection_store[:current_user_id]
+                          user: user
                           )
     post.save
 
   end
 
   def pop(data)
+    user = User.find params["data"][1]["user_id"]
+
     post = Post.find(data["message"]["post_id"])
     post.upvote_by user
 
-    PopBroadcastWorker.perform_async post.id, connection_store[:current_user_id]
+    PopBroadcastWorker.perform_async post.id, user.id
 
   end
 
@@ -61,13 +63,15 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def comment(data)
+    user = User.find params["data"][1]["user_id"]
+
     post = Post.find(data["message"]["id"])
 
     content = data["message"]["content"]
 
     comment = post.comments.new(
                                 content: content,
-                                user_id: connection_store[:current_user_id]
+                                user: user
                                 )
     comment.save
 
