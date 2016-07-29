@@ -67,6 +67,8 @@ class LiveChannel < ApplicationCable::Channel
 
     post = Post.find(data["message"]["post_id"])
 
+    feed = post.feed
+
     content = data["message"]["content"]
 
     comment = post.comments.new(
