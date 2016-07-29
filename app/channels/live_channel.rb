@@ -4,7 +4,7 @@ class LiveChannel < ApplicationCable::Channel
     season = params["data"][0]["season"]
     episode = params["data"][0]["episode"]
 
-    unless user = User.find params["data"][1]["user_id"]
+    unless user = User.find(params["data"][1]["user_id"])
       reject
     end
 
