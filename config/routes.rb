@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   post '/:tvrage_id/confirm' => 'shows#create'
   post '/watch/:id/' => 'watches#create'
   delete '/watch/:id/' => 'watches#destroy'
-  patch '/posts/:id/pop' => 'posts#pop'
   get '/search/init' => 'search#init'
   get '/search' => 'search#search'
   get '/upcoming' => 'episodes#upcoming'
