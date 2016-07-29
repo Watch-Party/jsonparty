@@ -1,7 +1,8 @@
 class ShowsController < ApplicationController
 
-  def show
-    @show = Show.find params[:id]
+  def info
+    showname = params[:showname].gsub(/\_/," ")
+    @show = Show.find_by(title: showname)
   end
 
   def index
