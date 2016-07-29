@@ -49,7 +49,7 @@ class PartyChannel < ApplicationCable::Channel
 
     user = User.find params["data"][1]["user_id"]
 
-    feed = episode.feeds.where(name: "#{episode.id}:#{user.id}").last
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
 
     post = feed.posts.new(
                           content: content,
