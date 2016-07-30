@@ -17,7 +17,7 @@ class DelayedChannel < ApplicationCable::Channel
     # show = Show.find_by(title: show)
     episode = Episode.find(episode_id)
 
-    feed = episode.feeds.new(
+    feed = episode.feeds.create(
                             species: "delayed",
                             start_time: Time.now,
                             name: "#{episode.id}:#{user.id}"
