@@ -75,7 +75,7 @@ class DelayedChannel < ApplicationCable::Channel
 
     post = Post.find(data["message"]["post_id"])
 
-    feed = post.feed
+    feed = Feed.where(name: "#{episode_id}:#{user.id}").last
 
     content = data["message"]["content"]
 
@@ -83,7 +83,7 @@ class DelayedChannel < ApplicationCable::Channel
                                 content: content,
                                 user: user,
                                 time_in_episode: Time.now - feed.start_time
-                                )
+                                feed: feed)
     comment.save
 
   end
