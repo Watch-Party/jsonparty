@@ -1,4 +1,5 @@
 class Admins::PasswordsController < Devise::PasswordsController
+  before_action :authenticate_admin!
   # GET /resource/password/new
   # def new
   #   super

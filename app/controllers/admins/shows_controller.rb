@@ -1,4 +1,5 @@
 class Admins::ShowsController < ApplicationController
+  before_action :authenticate_admin!
 
   def new
     @show = Show.new

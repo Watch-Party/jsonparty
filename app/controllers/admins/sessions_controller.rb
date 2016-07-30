@@ -1,5 +1,5 @@
 class Admins::SessionsController < Devise::SessionsController
-  skip_before_action :authenticate_user!, only: [:new, :create]
+   before_action :authenticate_admin!, except: [:new, :create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
