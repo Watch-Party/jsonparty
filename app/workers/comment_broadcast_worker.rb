@@ -28,6 +28,6 @@ class CommentBroadcastWorker
       content:      c.content,
       username:     c.user.screen_name,
       thumb_url:    c.user.avatar.thumb.url,
-      timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}}
+      timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}}.reverse
   end
 end
