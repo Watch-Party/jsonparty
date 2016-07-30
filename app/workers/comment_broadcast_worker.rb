@@ -6,7 +6,7 @@ class CommentBroadcastWorker
     post = comment.post
 
     unless feed_id.present?
-      feed_id = comment.feed_id
+      feed_id = post.feed_id
     end
 
     comments = find_comments(comment, post)
