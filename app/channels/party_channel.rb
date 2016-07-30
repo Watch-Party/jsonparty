@@ -28,7 +28,7 @@ class PartyChannel < ApplicationCable::Channel
       welcome: "You are in party channel #{feed.name}"
 
 
-    df = DelayedFeed.new feed viewtype user
+    df = DelayedFeed.new feed, viewtype, user
     df.start
 
   end
