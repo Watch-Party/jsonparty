@@ -55,4 +55,32 @@ class DelayedChannel < ApplicationCable::Channel
     post.save
 
   end
+
+  def pop(data)
+    user = User.find params["data"][1]["user_id"]
+
+    post = Post.find(data["message"]["post_id"])
+    post.upvote_by user
+
+    PopBroadcastWorker.perform_async post.id, user.id
+
+  end
+
+  def comment(data)
+    user = User.find params["data"][1]["user_id"]
+
+    post = Post.find(data["message"]["post_id"])
+
+    feed = post.feed
+
+    content = data["message"]["content"]
+
+    comment = post.comments.new(
+                                content: content,
+                                user: user,
+                                time_in_episode: Time.now - feed.start_time
+                                )
+    comment.save
+
+  end
 end
