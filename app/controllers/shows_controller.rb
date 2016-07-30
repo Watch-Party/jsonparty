@@ -1,4 +1,6 @@
 class ShowsController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_format
 
   def info
     showname = params[:showname].gsub(/\_/," ")
@@ -9,30 +11,6 @@ class ShowsController < ApplicationController
 
   def index
     @shows = Show.all
-  end
-
-  def new
-    showname = params[:showname].gsub(/\_/," ")
-    sfinder = ShowFinder.new showname
-    @shows = sfinder.options
-  end
-
-  def create
-    show = Show.find_by(tvrage_id: params[:tvrage_id])
-    show.confirmed = true
-    sfinder = SeasonsFinder.new show
-    show.seasons = sfinder.seasons
-    if show.save
-      episodes = EpisodeIndexer.new(show)
-      episodes.index
-      respond_to do |format|
-        format.json { render json: { status: "Show Added!"} }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { status: "Unable to add show"} }
-      end
-    end
   end
 
   def recent

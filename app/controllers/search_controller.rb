@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_format
 
   def search
     @results = PgSearch.multisearch(params[:criteria])

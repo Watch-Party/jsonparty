@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_format
 
   def index
     showname = params[:showname].gsub(/\_/," ")

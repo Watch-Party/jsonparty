@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins#, skip: :registration
   mount_devise_token_auth_for 'User', at: 'auth'
 
   # Serve websocket cable requests in-process
@@ -25,6 +26,10 @@ Rails.application.routes.draw do
   #     resources :posts, except: [:new, :edit], shallow: true
   #   end
   # end
+  get '/admins/admin/:id' => 'admins#show'
+  get '/admins/show/new' => 'admins/shows#new'
+  get '/admins/show/comfirm' => 'admins/shows#confirm'
+  post '/admins/show/:tvrage_id' => 'admins/shows#create'
 
   get '/party/:episode_id' => 'episodes#new_party'
   get  '/:showname/:season/:episode/posts' => 'posts#index'

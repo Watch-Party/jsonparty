@@ -1,4 +1,6 @@
 class EpisodesController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_format
 
   def show
     @episode = Episode.find params[:id]
