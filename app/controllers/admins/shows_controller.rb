@@ -1,11 +1,11 @@
-class AdminsShowsController < ApplicationController
+class Admins::ShowsController < ApplicationController
 
   def new
     @show = Show.new
   end
 
   def confirm
-    showname = params[:showname]
+    showname = params[:show][:title]
     sfinder = ShowFinder.new showname
     @shows = sfinder.options
   end

@@ -1,5 +1,5 @@
 <h4>Add a show to Watch Party</h4>
 <%= bootstrap_form_for @show, url: '/admins/show/comfirm', method: :get do |f| %>
-  <%= f.text_field :showname, label: "Show Name" %>
+  <%= f.text_field :title, label: "Show Name" %>
   <button class="btn btn-primary btn-sm">Submit</button>
 <% end %>

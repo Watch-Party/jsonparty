@@ -51,7 +51,7 @@
           </ul>
           <ul class="nav navbar-nav pull-right">
             <% if current_admin %>
-              <li><%= link_to "Stuff", new_admin_session_path  %></li>
+              <li><%= link_to "Admin Tools", "/admins/admin/#{current_admin.id}"  %></li>
               <li><%= link_to "Logout", destroy_admin_session_path, method: :delete  %></li>
             <% else %>
               <li><%= link_to "Admin Login", new_admin_session_path  %></li>

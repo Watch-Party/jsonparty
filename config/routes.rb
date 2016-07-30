@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   #     resources :posts, except: [:new, :edit], shallow: true
   #   end
   # end
+  get '/admins/admin/:id' => 'admins#show'
   get '/admins/show/new' => 'admins/shows#new'
-  get '/admins/show/comfirm' => 'admins/show#confirm'
+  get '/admins/show/comfirm' => 'admins/shows#confirm'
+  post '/admins/show/:tvrage_id' => 'admins/shows#create'
 
   get  '/:showname/:season/:episode/posts' => 'posts#index'
   get '/:showname/:season/:episode/' => 'episodes#get_id'
