@@ -59,10 +59,14 @@ class DelayedChannel < ApplicationCable::Channel
   def pop(data)
     user = User.find params["data"][1]["user_id"]
 
+    episode_id = params["data"][0]["episode_id"]
+
+    feed = Feed.where(name: "#{episode_id}:#{user.id}").last
+
     post = Post.find(data["message"]["post_id"])
     post.upvote_by user
 
-    PopBroadcastWorker.perform_async post.id, user.id
+    PopBroadcastWorker.perform_async post.id, user.id, feed.id
 
   end
 

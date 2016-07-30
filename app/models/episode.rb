@@ -12,6 +12,7 @@ class Episode < ApplicationRecord
 
   has_many :feeds, dependent: :destroy
   has_many :posts, through: :feeds
+  has_many :comments, through: :posts
   belongs_to :show
 
   def can_only_have_one_episode_number_per_season

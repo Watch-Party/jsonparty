@@ -1,13 +1,17 @@
 class CommentBroadcastWorker
   include Sidekiq::Worker
 
-  def perform(comment_id)
+  def perform(comment_id, feed_id = nil)
     comment = Comment.find comment_id
     post = comment.post
 
+    unless feed_id.present?
+      feed_id = comment.feed_id
+    end
+
     comments = find_comments(comment, post)
 
-    ActionCable.server.broadcast "#{post.feed_id}",
+    ActionCable.server.broadcast "#{feed_id}",
       post_id:    post.id,
       content:    post.content,
       username:   post.user.screen_name,
