@@ -1,4 +1,5 @@
 json.user do
+  json.id             @user.id
   json.username       @user.screen_name
   json.email          @user.email
   json.first_name     @user.first_name
