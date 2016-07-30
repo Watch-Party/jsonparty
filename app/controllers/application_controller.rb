@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  before_action :set_format
+  # before_action :set_format
 
   def set_format
     request.format = :json
