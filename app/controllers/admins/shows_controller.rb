@@ -18,13 +18,11 @@ class Admins::ShowsController < ApplicationController
     if show.save
       episodes = EpisodeIndexer.new(show)
       episodes.index
-      respond_to do |format|
-        format.json { render json: { status: "Show Added!"} }
-      end
+      flash[:notice] = "Show added!"
+      redirect_to "/admins/admin/#{current_admin.id}"
     else
-      respond_to do |format|
-        format.json { render json: { status: "Unable to add show"} }
-      end
+      flash[:notice] = "Unable to add show!"
+      render :new
     end
   end
 end
