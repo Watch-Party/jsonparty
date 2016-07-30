@@ -16,9 +16,32 @@ class EpisodesController < ApplicationController
   def get_id
     showname = params[:showname].gsub(/\_/," ")
     show = Show.find_by(title: showname)
-    episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
-    respond_to do |format|
-      format.json { render json: { episode_id: episode.id} }
+    if episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
+      respond_to do |format|
+        format.json { render json: { episode_id: episode.id} }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: "Episode not found"} }
+      end
+    end
+  end
+
+  def new_party
+    episode = Episode.find(params[:episode_id])
+    feed = episode.feeds.new(
+                            species: "delayed",
+                            start_time: Time.now,
+                            name: "#{episode.name}:#{sprintf '%05d', rand(1..99999)}"
+                            )
+    if feed.save
+      respond_to do |format|
+        format.json { render json: { feed_name: feed.name} }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: "Unable to process this request"} }
+      end
     end
   end
 

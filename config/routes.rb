@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   #   end
   # end
 
+  get '/party/:episode_id' => 'episodes#new_party'
   get  '/:showname/:season/:episode/posts' => 'posts#index'
   get '/:showname/:season/:episode/' => 'episodes#get_id'
   get '/:showname/info' => 'shows#info'
