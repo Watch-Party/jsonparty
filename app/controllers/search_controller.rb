@@ -2,8 +2,12 @@ class SearchController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
 
-  def search
-    @results = PgSearch.multisearch(params[:criteria])
+  def user
+    @users = User.search_for_user(params[:criteria])
+  end
+
+  def show
+    @shows = Show.search_for_show(params[:criteria])
   end
 
   def init
