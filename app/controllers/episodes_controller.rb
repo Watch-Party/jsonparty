@@ -32,7 +32,7 @@ class EpisodesController < ApplicationController
     feed = episode.feeds.new(
                             species: "delayed",
                             start_time: Time.now,
-                            name: "#{episode.name}:#{sprintf '%05d', rand(1..99999)}"
+                            name: "#{episode.title}:#{sprintf '%05d', rand(1..99999)}"
                             )
     if feed.save
       respond_to do |format|
