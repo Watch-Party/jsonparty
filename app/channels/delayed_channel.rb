@@ -82,7 +82,7 @@ class DelayedChannel < ApplicationCable::Channel
     comment = post.comments.new(
                                 content: content,
                                 user: user,
-                                time_in_episode: Time.now - feed.start_time
+                                time_in_episode: Time.now - feed.start_time,
                                 feed: feed)
     comment.save
 
