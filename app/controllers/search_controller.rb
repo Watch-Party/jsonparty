@@ -7,7 +7,7 @@ class SearchController < ApplicationController
   end
 
   def init
-    @recent = Show.where(:created_at => 1.weeks.ago..Time.now)
+    @recent = Show.where(confirmed: true, :created_at => 1.weeks.ago..Time.now)
     shows = Show.where(confirmed: true)
     @popular = shows.sort_by { |s| s.posts.count}.reverse.first(8)
   end
