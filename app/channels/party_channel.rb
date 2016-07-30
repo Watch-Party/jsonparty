@@ -1,8 +1,10 @@
 class PartyChannel < ApplicationCable::Channel
   def subscribed
-    show = params["data"][0]["show"]
-    season = params["data"][0]["season"]
-    episode = params["data"][0]["episode"]
+    # show = params["data"][0]["show"]
+    # season = params["data"][0]["season"]
+    # episode = params["data"][0]["episode"]
+
+    episode_id = params["data"][0]["episode_id"]
 
     unless user = User.find(params["data"][1]["user_id"])
       reject
@@ -11,21 +13,14 @@ class PartyChannel < ApplicationCable::Channel
     viewtype = params["data"][2]["viewtype"]
 
     stop_all_streams
-    feed_name = params["data"][3]["feed_name"]
-    show = Show.find_by(title: show)
-    episode = show.episodes.find_by(season: season, episode_number: episode)
 
-    if feed_name.present?
-      unless feed = Feed.find_by(name: feed_name)
-        reject
-      end
-    else
-      feed = episode.feeds.new(
-                              species: "delayed",
-                              start_time: Time.now,
-                              name: "#{episode.name}:#{sprintf '%05d', rand(1..99999)}"
-                              )
+    episode = Episode.find(episode_id)
+
+    feed_name = params["data"][3]["feed_name"]
+    unless feed = Feed.find_by(name: feed_name)
+      reject
     end
+
 
     stream_from "#{feed.id}"
 
@@ -43,9 +38,11 @@ class PartyChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    show = params["data"][0]["show"]
-    season = params["data"][0]["season"]
-    episode = params["data"][0]["episode"]
+    # show = params["data"][0]["show"]
+    # season = params["data"][0]["season"]
+    # episode = params["data"][0]["episode"]
+
+    episode_id = params["data"][0]["episode_id"]
 
     content = data["message"]["content"]
 
@@ -59,6 +56,40 @@ class PartyChannel < ApplicationCable::Channel
                           user: user
                           )
     post.save
+
+  end
+
+  def pop(data)
+    user = User.find params["data"][1]["user_id"]
+
+    episode_id = params["data"][0]["episode_id"]
+
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+
+    post = Post.find(data["message"]["post_id"])
+    post.upvote_by user
+
+    PopBroadcastWorker.perform_async post.id, user.id, feed.id
+
+  end
+
+  def comment(data)
+    user = User.find params["data"][1]["user_id"]
+
+    post = Post.find(data["message"]["post_id"])
+
+    episode_id = params["data"][0]["episode_id"]
+
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+
+    content = data["message"]["content"]
+
+    comment = post.comments.new(
+                                content: content,
+                                user: user,
+                                time_in_episode: Time.now - feed.start_time,
+                                feed: feed)
+    comment.save
 
   end
 end
