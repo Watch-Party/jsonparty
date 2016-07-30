@@ -1,9 +1,13 @@
 class PostBroadcastWorker
   include Sidekiq::Worker
 
-  def perform(post_id)
+  def perform(post_id, feed_id = nil)
     post = Post.find post_id
-    ActionCable.server.broadcast "#{post.feed_id}",
+    unless feed_id.present?
+      feed_id = post.feed_id
+    end
+
+    ActionCable.server.broadcast "#{feed_id}",
       post_id:    post.id,
       content:    post.content,
       username:   post.user.screen_name,
