@@ -1,4 +1,5 @@
 class Admins::SessionsController < Devise::SessionsController
+  skip_before_action :set_format
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

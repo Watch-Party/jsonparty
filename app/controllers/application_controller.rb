@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 
   def set_format
     request.format = :json
-
   end
 
   protected

@@ -1,4 +1,5 @@
 class Admins::ConfirmationsController < Devise::ConfirmationsController
+  skip_before_action :set_format
   # GET /resource/confirmation/new
   # def new
   #   super
