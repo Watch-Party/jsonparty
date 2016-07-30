@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
 
   belongs_to :post
   belongs_to :user
+  belongs_to :feed
 
   after_create_commit { CommentBroadcastWorker.perform_async self.id }
 end
