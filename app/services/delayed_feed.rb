@@ -19,7 +19,7 @@ class DelayedFeed
       PostBroadcastWorker.perform_in(
                                 (post.time_in_episode.to_i).seconds,
                                  post.id,
-                                 feed.id
+                                 @feed.id
                                  )
     end
   end
