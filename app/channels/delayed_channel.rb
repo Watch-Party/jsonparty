@@ -25,7 +25,7 @@ class DelayedChannel < ApplicationCable::Channel
 
     stream_from "#{feed.id}"
 
-    df = DelayedFeed.new feed viewtype user
+    df = DelayedFeed.new(feed, viewtype, user)
     df.start
 
   end
