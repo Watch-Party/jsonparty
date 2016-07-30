@@ -57,19 +57,6 @@ class LiveChannel < ApplicationCable::Channel
 
   end
 
-  def ping(data)
-    show = params["data"][0]["show"]
-    season = params["data"][0]["season"]
-    episode = params["data"][0]["episode"]
-
-    show = Show.find_by(title: show)
-    episode = show.episodes.find_by(season: season, episode_number: episode)
-    feed = episode.feeds.find_by(name: "live")
-
-    ActionCable.server.broadcast "#{feed.id}",
-    pong: "#{current_user.screen_name}"
-  end
-
   def comment(data)
     user = User.find params["data"][1]["user_id"]
 
