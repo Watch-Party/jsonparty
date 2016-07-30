@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, skip: :registration
   mount_devise_token_auth_for 'User', at: 'auth'
 
   # Serve websocket cable requests in-process
