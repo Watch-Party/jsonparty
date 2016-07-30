@@ -75,6 +75,8 @@ class DelayedChannel < ApplicationCable::Channel
 
     post = Post.find(data["message"]["post_id"])
 
+    episode_id = params["data"][0]["episode_id"]
+
     feed = Feed.where(name: "#{episode_id}:#{user.id}").last
 
     content = data["message"]["content"]
