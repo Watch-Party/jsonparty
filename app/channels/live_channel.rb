@@ -1,8 +1,10 @@
 class LiveChannel < ApplicationCable::Channel
   def subscribed
-    show = params["data"][0]["show"]
-    season = params["data"][0]["season"]
-    episode = params["data"][0]["episode"]
+    # show = params["data"][0]["show"]
+    # season = params["data"][0]["season"]
+    # episode = params["data"][0]["episode"]
+
+    episode_id = params["data"][0]["episode_id"]
 
     unless user = User.find(params["data"][1]["user_id"])
       reject
@@ -10,8 +12,8 @@ class LiveChannel < ApplicationCable::Channel
 
     stop_all_streams
 
-    show = Show.find_by(title: show)
-    episode = show.episodes.find_by(season: season, episode_number: episode)
+    # show = Show.find_by(title: show)
+    episode = Episode.find(episode_id)
     feed = episode.feeds.find_by(name: "live")
 
     stream_from "#{feed.id}"
@@ -22,16 +24,18 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    show = params["data"][0]["show"]
-    season = params["data"][0]["season"]
-    episode = params["data"][0]["episode"]
+    # show = params["data"][0]["show"]
+    # season = params["data"][0]["season"]
+    # episode = params["data"][0]["episode"]
+
+    episode_id = params["data"][0]["episode_id"]
 
     content = data["message"]["content"]
 
     user = User.find params["data"][1]["user_id"]
 
-    show = Show.find_by(title: show)
-    episode = show.episodes.find_by(season: season, episode_number: episode)
+    # show = Show.find_by(title: show)
+    episode = Episode.find(episode_id)
     feed = episode.feeds.find_by(name: "live")
 
     post = feed.posts.new(
