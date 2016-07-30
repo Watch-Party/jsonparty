@@ -17,7 +17,7 @@ class DelayedFeed
 
     posts.each do |post|
       PostBroadcastWorker.perform_in(
-                                (post.time_in_episode.to_i - @feed.start_time.to_i).seconds,
+                                (post.time_in_episode.to_i).seconds,
                                  post.id
                                  )
     end
