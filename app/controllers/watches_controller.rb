@@ -1,4 +1,6 @@
 class WatchesController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_format
 
   def create
     w = Watch.new(watcher: current_user, watched_id: params[:id])

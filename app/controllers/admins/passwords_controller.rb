@@ -1,5 +1,4 @@
 class Admins::PasswordsController < Devise::PasswordsController
-  skip_before_action :set_format
   # GET /resource/password/new
   # def new
   #   super

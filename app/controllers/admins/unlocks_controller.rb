@@ -1,5 +1,4 @@
 class Admins::UnlocksController < Devise::UnlocksController
-  skip_before_action :set_format
   # GET /resource/unlock/new
   # def new
   #   super
