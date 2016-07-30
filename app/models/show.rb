@@ -1,7 +1,11 @@
 class Show < ApplicationRecord
 
   include PgSearch
-  pg_search_scope :search_for_show, :against => :title
+  pg_search_scope :whose_name_starts_with,
+              :against => :title,
+              :using => {
+                :tsearch => {:prefix => true}
+              }
 
   validates_uniqueness_of :title
 

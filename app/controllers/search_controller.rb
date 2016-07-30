@@ -2,12 +2,14 @@ class SearchController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
 
-  def user
-    @users = User.search_for_user(params[:criteria])
+  def users
+    @users = User.blah(params[:criteria])
+    raise
   end
 
-  def show
-    @shows = Show.search_for_show(params[:criteria])
+  def shows
+    @shows = Show.whose_name_starts_with(params[:criteria])
+    raise
   end
 
   def init

@@ -40,8 +40,8 @@ Rails.application.routes.draw do
   post '/watch/:id/' => 'watches#create'
   delete '/watch/:id/' => 'watches#destroy'
   get '/search/init' => 'search#init'
-  get '/search/user' => 'search#user'
-  get '/search/user' => 'search#show'
+  get '/search/users' => 'search#users'
+  get '/search/shows' => 'search#shows'
   get '/upcoming' => 'episodes#upcoming'
   get '/recent' => 'shows#recent'
 
