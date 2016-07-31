@@ -13,7 +13,14 @@
         <tr>
           <th><%= s.title %></th>
           <th><%= s.network %></th>
-          <th><%= button_to('Confirm', "/admins/show/#{s.tvrage_id}", class: 'btn btn-xs btn-primary') %></th>
+          <th class="button-container">
+            <%= button_to('Edit', "/admins/show/#{s.id}/edit", class: 'btn btn-xs btn-default', method: :get) %>
+            <% if s.active %>
+              <%= button_to('Deactivate', "/admins/show/#{s.id}/deactivate", class: 'btn btn-xs btn-danger', method: :patch) %>
+            <% else %>
+              <%= button_to('Activate', "/admins/show/#{s.id}/activate", class: 'btn btn-xs btn-info', method: :patch) %>
+            <% end %>
+          </th>
         </tr>
       <% end %>
     </tbody>
