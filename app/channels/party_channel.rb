@@ -28,13 +28,25 @@ class PartyChannel < ApplicationCable::Channel
       welcome: "You are in party channel #{feed.name}"
 
 
-    df = DelayedFeed.new feed, viewtype, user
-    df.start
+    # df = DelayedFeed.new feed, viewtype, user
+    # df.start
 
   end
 
   def unsubscribed
     stop_all_streams
+  end
+
+  def start(data)
+
+    user = User.find(params["data"][1]["user_id"])
+
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+
+    viewtype = params["data"][2]["viewtype"]
+
+    df = DelayedFeed.new feed, viewtype, user
+    df.start
   end
 
   def post(data)
