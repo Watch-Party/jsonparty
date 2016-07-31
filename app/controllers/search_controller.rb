@@ -3,11 +3,11 @@ class SearchController < ApplicationController
   before_action :set_format
 
   def users
-    @users = User.blah(params[:criteria])
+    @users = User.search_by_sn_and_email(params[:criteria])
   end
 
   def shows
-    @shows = Show.whose_name_starts_with(params[:criteria])
+    @shows = Show.search_by_title(params[:criteria])
   end
 
   def search
