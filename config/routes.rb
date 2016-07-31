@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get '/admins/show/new' => 'admins/shows#new'
   get '/admins/show/comfirm' => 'admins/shows#confirm'
   post '/admins/show/:tvrage_id' => 'admins/shows#create'
+  get '/admins/show/:id/edit' => 'admins/shows#edit'
+  patch '/admins/show/:id/update' => 'admins/shows#update'
+  get '/admins/shows' => 'admins/shows#index'
 
   get '/party/:episode_id' => 'episodes#new_party'
   get  '/:showname/:season/:episode/posts' => 'posts#index'

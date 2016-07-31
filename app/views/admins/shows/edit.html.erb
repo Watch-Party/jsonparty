@@ -1,0 +1,20 @@
+<h3>Edit Info for <%= @show.title %></h3>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div> <!--padding-->
+        <ul>
+        </ul>
+      </div>
+      <img src="<%= @show.cover_img_url %>" height="236" width="180" />
+    </div>
+    <div class="col-lg-7">
+      <%= bootstrap_form_for(@show, url: "/admins/show/#{@show.id}/update", method: :PATCH) do |f| %>
+        <%= f.text_field :title %>
+        <%= f.text_field :network %>
+        <%= f.text_area :summary %>
+        <%= f.submit "Update" %>
+      <% end %>
+    </div>
+  </div>
+</div>
