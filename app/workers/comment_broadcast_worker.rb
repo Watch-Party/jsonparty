@@ -9,6 +9,12 @@ class CommentBroadcastWorker
       feed_id = comment.feed_id
     end
 
+    if post.time_in_episode < 0
+      post_timestamp = -(Time.at(post.time_in_episode).utc.strftime("%M:%S"))
+    else
+      post_timestamp = Time.at(post.time_in_episode).utc.strftime("%M:%S")
+    end
+
     comments = find_comments(comment, post)
 
     ActionCable.server.broadcast "#{feed_id}",
@@ -16,7 +22,7 @@ class CommentBroadcastWorker
       content:    post.content,
       username:   post.user.screen_name,
       thumb_url:  post.user.avatar.thumb.url,
-      timestamp:  Time.at(post.time_in_episode).utc.strftime("%M:%S"),
+      timestamp:  post_timestamp,
       pops:       post.get_upvotes.size,
       comments:   comments
 
@@ -28,6 +34,14 @@ class CommentBroadcastWorker
       content:      c.content,
       username:     c.user.screen_name,
       thumb_url:    c.user.avatar.thumb.url,
-      timestamp:    Time.at(c.time_in_episode).utc.strftime("%M:%S")}}.reverse
+      timestamp:    comment_time_in_episode(c)}}.reverse
+  end
+
+  def comment_time_in_episode(comment)
+    if comment.time_in_episode < 0
+      -(Time.at(comment.time_in_episode).utc.strftime("%M:%S"))
+    else
+      Time.at(comment.time_in_episode).utc.strftime("%M:%S")
+    end
   end
 end
