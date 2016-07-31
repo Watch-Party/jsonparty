@@ -8,7 +8,7 @@ class PostBroadcastWorker
     end
 
     if post.time_in_episode < 0
-      timestamp = -(Time.at(post.time_in_episode).utc.strftime("%M:%S"))
+      timestamp = "-#{(Time.at(-(post.time_in_episode)).utc.strftime("%M:%S"))}"
     else
       timestamp = Time.at(post.time_in_episode).utc.strftime("%M:%S")
     end

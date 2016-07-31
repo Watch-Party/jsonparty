@@ -10,7 +10,7 @@ class CommentBroadcastWorker
     end
 
     if post.time_in_episode < 0
-      post_timestamp = -(Time.at(post.time_in_episode).utc.strftime("%M:%S"))
+      post_timestamp = "-#{(Time.at(-(post.time_in_episode)).utc.strftime("%M:%S"))}"
     else
       post_timestamp = Time.at(post.time_in_episode).utc.strftime("%M:%S")
     end
@@ -39,7 +39,7 @@ class CommentBroadcastWorker
 
   def comment_time_in_episode(comment)
     if comment.time_in_episode < 0
-      -(Time.at(comment.time_in_episode).utc.strftime("%M:%S"))
+      "-#{(Time.at(-(comment.time_in_episode)).utc.strftime("%M:%S"))}"
     else
       Time.at(comment.time_in_episode).utc.strftime("%M:%S")
     end
