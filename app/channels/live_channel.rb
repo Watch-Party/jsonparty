@@ -40,7 +40,7 @@ class LiveChannel < ApplicationCable::Channel
 
     post = feed.posts.new(
                           content: content,
-                          time_in_episode: Time.now - feed.start_time,
+                          time_in_episode: Time.now - episode.air_date,
                           user: user
                           )
     post.save
@@ -60,7 +60,11 @@ class LiveChannel < ApplicationCable::Channel
   def comment(data)
     user = User.find params["data"][1]["user_id"]
 
+    episode_id = params["data"][0]["episode_id"]
+
     post = Post.find(data["message"]["post_id"])
+
+    episode = Episode.find(episode_id)
 
     feed = post.feed
 
@@ -69,7 +73,7 @@ class LiveChannel < ApplicationCable::Channel
     comment = post.comments.new(
                                 content: content,
                                 user: user,
-                                time_in_episode: Time.now - feed.start_time,
+                                time_in_episode: Time.now - episode.air_date,
                                 feed_id: feed.id
                                 )
     comment.save
