@@ -7,6 +7,7 @@ json.show do
   json.network      @show.network
 
   if @upcoming.present?
+    json.upcoming_id       @upcoming.id
     json.upcoming_title    @upcoming.title
     json.upcoming_date     @upcoming.air_date.in_time_zone('Eastern Time (US & Canada)').strftime("%B %-d, %Y - %I:%M%p EST")
   else
@@ -14,6 +15,7 @@ json.show do
     json.upcoming_date     "TBA"
   end
 
+  json.recent_id          @recent.id
   json.recent_title       @recent.title
   json.recent_date        @recent.air_date.in_time_zone('Eastern Time (US & Canada)').strftime("%B %-d, %Y - %I:%M%p EST")
 end
