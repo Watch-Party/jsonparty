@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160730155148) do
-=======
-ActiveRecord::Schema.define(version: 20160730141350) do
->>>>>>> admin_site
+ActiveRecord::Schema.define(version: 20160731214821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +97,7 @@ ActiveRecord::Schema.define(version: 20160730141350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "network"
+    t.boolean  "active",        default: true
   end
 
   create_table "shows_users", force: :cascade do |t|
