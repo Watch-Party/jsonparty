@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get '/search/init' => 'search#init'
   get '/search/users' => 'search#users'
   get '/search/shows' => 'search#shows'
+  get '/episodes/:id' => 'episodes#info'
   get '/upcoming' => 'episodes#upcoming'
   get '/recent' => 'shows#recent'
   get '/search' => 'search#search'
