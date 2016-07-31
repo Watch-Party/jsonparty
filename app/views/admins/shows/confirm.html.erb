@@ -18,3 +18,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <span class="button-container">
+    <p>Didn't Find The Show You Were Looking For?</p>
+    <%= button_to('Search Again', "/admins/show/new", class: 'btn btn-md btn-default', method: :get) %>
+  </span>
