@@ -1,7 +1,6 @@
 class Show < ApplicationRecord
 
   include PgSearch
-  # multisearchable :against => :title
   pg_search_scope :search_by_title,
               :against => :title,
               :using => {

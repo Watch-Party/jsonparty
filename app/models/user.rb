@@ -6,7 +6,6 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   include PgSearch
-  # multisearchable :against => [:screen_name, :email]
   pg_search_scope :search_by_sn_and_email, :against => [:screen_name, :email],
                   :using => {
                     :tsearch => {:prefix => true}
