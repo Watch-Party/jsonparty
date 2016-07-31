@@ -4,12 +4,14 @@ class SearchController < ApplicationController
 
   def users
     @users = User.blah(params[:criteria])
-    raise
   end
 
   def shows
     @shows = Show.whose_name_starts_with(params[:criteria])
-    raise
+  end
+
+  def search
+    @results = PgSearch.multisearch(params[:criteria])
   end
 
   def init

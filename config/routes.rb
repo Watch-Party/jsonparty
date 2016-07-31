@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   get '/search/shows' => 'search#shows'
   get '/upcoming' => 'episodes#upcoming'
   get '/recent' => 'shows#recent'
+  get '/search' => 'search#search'
 
 end

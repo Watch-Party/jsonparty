@@ -1,11 +1,12 @@
 class Show < ApplicationRecord
 
   include PgSearch
-  pg_search_scope :whose_name_starts_with,
-              :against => :title,
-              :using => {
-                :tsearch => {:prefix => true}
-              }
+  multisearchable :against => :title
+  # pg_search_scope :whose_name_starts_with,
+  #             :against => :title,
+  #             :using => {
+  #               :tsearch => {:prefix => true}
+  #             }
 
   validates_uniqueness_of :title
 
