@@ -49,6 +49,13 @@ class Admins::ShowsController < ApplicationController
     end
   end
 
+  def deactivate
+    show = Show.find params[:id]
+    show.destroy
+    flash[:notice] = "Show Deactivated!"
+    redirect_to "/admins/shows"
+  end
+
   private
 
   def approved_params
