@@ -15,8 +15,6 @@ class CommentBroadcastWorker
       post_timestamp = Time.at(post.time_in_episode).utc.strftime("%M:%S")
     end
 
-    comments = find_comments(comment, post)
-
     ActionCable.server.broadcast "#{feed_id}",
       post_id:    post.id,
       content:    post.content,
@@ -24,7 +22,7 @@ class CommentBroadcastWorker
       thumb_url:  post.user.avatar.thumb.url,
       timestamp:  post_timestamp,
       pops:       post.get_upvotes.size,
-      comments:   comments
+      comments:   find_comments(comment, post)
 
   end
 
