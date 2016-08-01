@@ -1,7 +1,6 @@
 class Feed < ApplicationRecord
 
   validates_presence_of :species,
-                        :start_time,
                         :name
 
   belongs_to :episode

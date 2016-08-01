@@ -33,7 +33,6 @@ class EpisodesController < ApplicationController
     episode = Episode.find(params[:episode_id])
     feed = episode.feeds.new(
                             species: "delayed",
-                            start_time: Time.now,
                             name: "#{episode.title}:#{sprintf '%05d', rand(1..99999)}"
                             )
     if feed.save

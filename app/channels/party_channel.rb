@@ -42,6 +42,8 @@ class PartyChannel < ApplicationCable::Channel
     user = User.find(params["data"][1]["user_id"])
 
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    feed.start_time = Time.now
+    feed.save
 
     viewtype = params["data"][2]["viewtype"]
 
@@ -62,9 +64,15 @@ class PartyChannel < ApplicationCable::Channel
 
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
 
+    if feed.start_time.present?
+      time_in_episode = Time.now - feed.start_time
+    else
+      time_in_episode = 0
+    end
+
     post = feed.posts.new(
                           content: content,
-                          time_in_episode: Time.now - feed.start_time,
+                          time_in_episode: time_in_episode,
                           user: user
                           )
     post.save
@@ -94,12 +102,18 @@ class PartyChannel < ApplicationCable::Channel
 
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
 
+    if feed.start_time.present?
+      time_in_episode = Time.now - feed.start_time
+    else
+      time_in_episode = 0
+    end
+
     content = data["message"]["content"]
 
     comment = post.comments.new(
                                 content: content,
                                 user: user,
-                                time_in_episode: Time.now - feed.start_time,
+                                time_in_episode: time_in_episode,
                                 feed: feed)
     comment.save
 
