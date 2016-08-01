@@ -41,14 +41,17 @@ class PartyChannel < ApplicationCable::Channel
 
     user = User.find(params["data"][1]["user_id"])
 
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
-    feed.start_time = Time.now
-    feed.save
-
     viewtype = params["data"][2]["viewtype"]
 
-    df = DelayedFeed.new feed, viewtype, user
-    df.start
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+
+    unless feed.start_time.present?
+      feed.start_time = Time.now
+      feed.save
+
+      df = DelayedFeed.new feed, viewtype, user
+      df.start
+    end
   end
 
   def post(data)
