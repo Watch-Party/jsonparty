@@ -5,14 +5,14 @@ class EpisodeIndexer
   end
 
   def index
-    resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes?specials=1"
+    resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes"
     resp.each do |e|
       add_episode e
     end
   end
 
   def update
-    resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes?specials=1"
+    resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes"
     resp.each do |e|
       unless @show.episodes.find_by(tvrage_e_id: e["id"]).present?
         add_episode e
