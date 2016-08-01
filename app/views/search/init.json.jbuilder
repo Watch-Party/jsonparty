@@ -10,5 +10,5 @@ json.popular @popular do |popu|
   json.title  popu.title
   json.img_url  popu.cover_img_url
   json.total_posts  popu.posts.count
-  json.last_episode_posts   popu.episodes.last.posts.count
+  json.last_episode_posts   popu.episodes.where('air_date <= ?', Time.now).last.posts.count
 end
