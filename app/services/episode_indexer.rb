@@ -36,9 +36,11 @@ class EpisodeIndexer
                       )
     epi.save!
 
-    epi.feeds.create!(species: "live",
-                      start_time: epi.air_date,
-                      name: "live"
-                      )
+    if epi.air_date > Time.now
+      LiveFeedWoker.perform_at(
+                              (epi.air_date - (1.hours + 20.minutes)),
+                              epi.id
+                              )
+    end
   end
 end
