@@ -20,7 +20,7 @@ json.show do
 
   json.seasons (1..@show.seasons).reverse_each do |season|
     json.season     season
-    json.episodes   @show.episodes.where(season: season) do |episode|
+    json.episodes   @show.episodes.where(season: season).order(:tvrage_e_id) do |episode|
       json.episode  episode.episode_number
       json.info do
         json.id   episode.id
