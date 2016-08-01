@@ -21,7 +21,7 @@ class CommentBroadcastWorker
       username:   post.user.screen_name,
       thumb_url:  post.user.avatar.thumb.url,
       timestamp:  post_timestamp,
-      pops:       post.get_upvotes.size,
+      pops:       post.cached_votes_total,
       comments:   find_comments(comment, post)
 
   end

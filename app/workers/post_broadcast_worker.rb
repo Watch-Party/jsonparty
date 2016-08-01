@@ -19,6 +19,6 @@ class PostBroadcastWorker
       username:   post.user.screen_name,
       thumb_url:  post.user.avatar.thumb.url,
       timestamp:  timestamp,
-      pops:       post.get_upvotes.size
+      pops:       post.cached_votes_total
   end
 end

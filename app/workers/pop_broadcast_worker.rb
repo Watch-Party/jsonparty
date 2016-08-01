@@ -11,7 +11,7 @@ class PopBroadcastWorker
 
     ActionCable.server.broadcast "#{post.feed_id}",
       post_id:    post.id,
-      pops:       post.get_upvotes.size,
+      pops:       post.cached_votes_total,
       popper:     user.screen_name,
       poppee:     post.user.screen_name
   end
