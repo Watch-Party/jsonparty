@@ -1,8 +1,0 @@
-:verbose: false
-:concurrency: 10
-
-
-production:
-  :concurrency: 2
-staging:
-  :concurrency: 15
