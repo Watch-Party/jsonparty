@@ -14,8 +14,7 @@ class ShowsController < ApplicationController
   end
 
   def recent
-    user = User.find params[:user]
-    @shows = Show.joins(:posts).where('posts.user_id = ?', user.id).uniq.includes(:episodes).limit(5)
+    @shows = Show.joins(:posts).where('posts.user_id = ?', current_user.id).uniq.limit(5).includes(:episodes)
   end
 
   def update
