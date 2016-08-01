@@ -4,5 +4,5 @@ json.posts @posts do |post|
   json.thumb_url  post.user.avatar.thumb.url
   json.timestamp  "-#{(Time.at(-(post.time_in_episode)).utc.strftime("%M:%S"))}"
   json.content    post.content
-  json.pops       post.get_upvotes.size
+  json.pops       post.cached_votes_total
 end

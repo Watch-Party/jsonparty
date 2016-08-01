@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801172628) do
+ActiveRecord::Schema.define(version: 20160801195318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 20160801172628) do
     t.datetime "updated_at"
     t.integer  "feed_id"
     t.string   "feed_name"
+    t.integer  "cached_votes_total", default: 0
+    t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
     t.index ["feed_id"], name: "index_posts_on_feed_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
