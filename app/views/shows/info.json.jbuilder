@@ -18,7 +18,7 @@ json.show do
   json.recent_title       @recent.title
   json.recent_date        @recent.air_date.in_time_zone('Eastern Time (US & Canada)').strftime("%B %-d, %Y - %I:%M%p EST")
 
-  json.seasons (1..@show.seasons) do |season|
+  json.seasons (1..@show.seasons).reverse_each do |season|
     json.season     season
     json.episodes   @show.episodes.where(season: season) do |episode|
       json.episode  episode.episode_number
