@@ -39,7 +39,7 @@ class EpisodeIndexer
     epi.save!
 
     if epi.air_date > Time.now
-      LiveFeedWoker.perform_at(
+      LiveFeedWorker.perform_at(
                               (epi.air_date - (1.hours + 20.minutes)),
                               epi.id
                               )
