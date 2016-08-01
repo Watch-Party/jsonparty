@@ -9,16 +9,8 @@ class ShowsController < ApplicationController
     @recent = @show.episodes.where("air_date <= ?", Time.now).last
   end
 
-  def index
-    @shows = Show.all
-  end
-
   def recent
     @shows = Show.joins(:posts).where('posts.user_id = ?', current_user.id).uniq.limit(5).includes(:episodes)
-  end
-
-  def update
-    @show = Show.find params[:id]
   end
 
 end
