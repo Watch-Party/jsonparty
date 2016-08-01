@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   delegate :episode, :to => :feed, :allow_nil => true
-  delegate :show, :to => :episode, :allow_nil => true
+  delegate :show, :to => :episode, :counter_cache => true, :allow_nil => true
 
   after_create_commit { PostBroadcastWorker.perform_async self.id }
 
