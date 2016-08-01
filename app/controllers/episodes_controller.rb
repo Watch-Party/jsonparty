@@ -17,7 +17,7 @@ class EpisodesController < ApplicationController
 
   def get_id
     showname = params[:showname].gsub(/\_/," ")
-    show = Show.find_by(title: showname)
+    show = Show.find_by('lower(title) = ?', showname.downcase)
     if episode = show.episodes.find_by(season: params[:season], episode_number: params[:episode])
       respond_to do |format|
         format.json { render json: { episode_id: episode.id} }

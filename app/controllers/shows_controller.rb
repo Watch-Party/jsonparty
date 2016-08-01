@@ -4,7 +4,7 @@ class ShowsController < ApplicationController
 
   def info
     showname = params[:showname].gsub(/\_/," ")
-    @show = Show.find_by(title: showname)
+    @show = Show.find_by('lower(title) = ?', showname.downcase)
     @upcoming = @show.episodes.where("air_date >= ?", Time.now).first
     @recent = @show.episodes.where("air_date <= ?", Time.now).last
   end
