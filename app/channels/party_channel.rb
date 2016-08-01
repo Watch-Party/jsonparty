@@ -4,7 +4,7 @@ class PartyChannel < ApplicationCable::Channel
     # season = params["data"][0]["season"]
     # episode = params["data"][0]["episode"]
 
-    episode_id = params["data"][0]["episode_id"]
+    # episode_id = params["data"][0]["episode_id"]
 
     unless user = User.find(params["data"][1]["user_id"])
       reject
@@ -14,7 +14,7 @@ class PartyChannel < ApplicationCable::Channel
 
     stop_all_streams
 
-    episode = Episode.find(episode_id)
+    # episode = Episode.find(episode_id)
 
     feed_name = params["data"][3]["feed_name"]
     unless feed = Feed.find_by(name: feed_name)
