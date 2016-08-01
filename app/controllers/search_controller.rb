@@ -10,14 +10,13 @@ class SearchController < ApplicationController
     @shows = Show.search_by_title(params[:criteria]).where(active: true)
   end
 
-  def search
-    @results = PgSearch.multisearch(params[:criteria])
-  end
+  # def search
+  #   @results = PgSearch.multisearch(params[:criteria])
+  # end
 
   def init
-    shows = Show.where(confirmed: true, active: true)
-    @recent = shows.where(:created_at => 1.weeks.ago..Time.now)
-    @popular = shows.sort_by { |s| s.posts.count}.reverse.first(8)
+    @recent = Show.where(confirmed: true, active: true, :created_at => 1.weeks.ago..Time.now)
+    @popular = Show.where(confirmed: true, active: true).select('shows.*, COUNT(posts.id) post_count').joins(:posts).group("shows.id").order("post_count DESC").limit(8)
   end
 
 end
