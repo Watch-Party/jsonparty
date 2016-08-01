@@ -12,7 +12,7 @@ class EpisodesController < ApplicationController
   end
 
   def upcoming
-    @episodes = Episode.where(:air_date => Time.now..2.days.from_now)
+    @episodes = Episode.where(:air_date => Time.now..2.days.from_now).includes(:show)
   end
 
   def get_id
