@@ -71,7 +71,7 @@ Will send confirmation email to user
 
 
 ## To update user
-####PATCH "https://wp-spoileralert.herokuapp.com/auth"
+####PATCH or PUT "https://wp-spoileralert.herokuapp.com/auth"
 
 **request**
 
@@ -118,6 +118,35 @@ only need fields that are being changed
               "avatar": avatar url stuff
             }
 
+## To get user info
+####GET "https://wp-spoileralert.herokuapp.com/users/:user_id"
+
+**request**
+
+no additional info needed
+
+**response**
+
+
+
+        {
+          user: {
+              id: 1,
+              username: "boblablah",
+              email: "bob@example.com",
+              first_name: "Robert",
+              last_name: "LaBlah",
+              bio: "A jaunty man from France",
+              location: "France, duh",
+              avatar: avatar url stuff,
+              avatar_thumb: avatar url stuff,
+              total_posts: 56,
+              watching: [ ],
+              watched_by: [ ]
+          }
+        }
+
+
 
 ## To get posts for an episode (only posts before episode started)
 ####GET "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
@@ -145,6 +174,7 @@ no additional info needed
 
 ## To watch user
 ####POST "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+note: user_id is of the user being watched
 
 **request**
 
@@ -161,6 +191,7 @@ no additional info needed
 
 ## To UNwatch user
 ####DELETE "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+note: user_id is of the user being unwatched
 
 **request**
 
@@ -175,7 +206,58 @@ no additional info needed
                 status: "Unable to unwatch"
 
 
-## To search for show by title
+## To get recent and popular show data
+####GET 'https://wp-spoileralert.herokuapp.com/search/init'
+
+**request**
+
+no additional info needed
+
+**response**
+
+
+            {
+              recent: [
+                {
+                  id: 24,
+                  title: "Stranger Things",
+                  img_url: img url stuff,
+                  show_added_on: "July 30 2016 - 04:06PM EST"
+                },
+                {
+                  id: 26,
+                  title: "Preacher",
+                  img_url: img url stuff,
+                  show_added_on: "July 30 2016 - 04:49PM EST"
+                }
+              ],
+              popular: [
+                {
+                  id: 2,
+                  title: "Game of Thrones",
+                  img_url: img url stuff,
+                  total_posts: 1585,
+                  last_episode_posts: 1
+                },
+                {
+                  id: 26,
+                  title: "Preacher",
+                  img_url: img url stuff,
+                  total_posts: 186,
+                  last_episode_posts: 186
+                },
+                {
+                id: 3,
+                  title: "Doctor Who",
+                  img_url: img url stuff,
+                  total_posts: 72,
+                  last_episode_posts: 34
+                }
+              ]
+            }
+
+
+## To search for shows by title
 ####GET 'https://wp-spoileralert.herokuapp.com/search/shows?criteria="thing to search for"'
 
 **request**
@@ -197,7 +279,7 @@ no additional info needed
 
 
 
-## To search for user by screen name or email
+## To search for users by screen name or email
 ####GET 'https://wp-spoileralert.herokuapp.com/search/users?criteria="thing to search for"'
 
 **request**
@@ -209,12 +291,103 @@ no additional info needed
             {
             users: [
                   {
-                      username: "boblablah",
+                      screen_name: "boblablah",
                       email: "bob@example.com",
                       id: 1
                   }
               ]
             }
+
+## To get basic show info
+####GET 'https://wp-spoileralert.herokuapp.com/:showname/info'
+
+**request**
+
+no additional info needed
+
+**response**
+
+            {
+              show: {
+                id: 2,
+                title: "Game of Thrones",
+                img_url: img url stuff,
+                description: "<p>Based on the bestselling book series <em>A Song of Ice and Fire</em> by George R.R. Martin, this sprawling new HBO drama is set in a world where summers span decades and winters can last a lifetime. From the scheming south and the savage eastern lands, to the frozen north and ancient Wall that protects the realm from the mysterious darkness beyond, the powerful families of the Seven Kingdoms are locked in a battle for the Iron Throne. This is a story of duplicity and treachery, nobility and honor, conquest and triumph. In the <em>"Game of Thrones"</em>, you either win or you die.</p>",
+                network: "HBO",
+                upcoming_title: "TBA",
+                upcoming_date: "TBA",
+                recent_id: 354,
+                recent_title: "The Winds of Winter",
+                recent_date: "June 26, 2016 - 09:00PM EST",
+                seasons: [ ... ]
+            }
+
+
+## To get info for recently aired shows
+####GET 'https://wp-spoileralert.herokuapp.com/recent'
+
+**request**
+
+no additional info needed
+
+**response**
+
+            {
+            recent_shows: [
+                  {
+                      title: "Doctor Who",
+                      seasons: [ ... ]
+                  }
+              ]
+            }
+
+
+## To get basic episode info
+####GET 'https://wp-spoileralert.herokuapp.com/episodes/:episode_id'
+
+**request**
+
+no additional info needed
+
+**response**
+
+            {
+              showname:        "Game of Thrones",
+              season_number:    1,
+              episode_number:  "3"
+            }
+
+
+## To get upcoming episode info
+####GET 'https://wp-spoileralert.herokuapp.com/upcoming'
+
+**request**
+
+no additional info needed
+
+**response**
+
+            {
+              upcoming: [
+                  {
+                    id: 4246,
+                    show: "The Bachelorette",
+                    season: 12,
+                    episode_number: "11",
+                    episode_title: "Week 9",
+                    air_date: "2016-08-02T00:00:00.000Z"
+                  },
+                  {
+                    id: 4247,
+                    show: "The Bachelorette",
+                    season: 12,
+                    episode_number: "12",
+                    episode_title: "After the Final Rose",
+                    air_date: "2016-08-02T02:00:00.000Z"
+                  }
+              ]
+            }
+
 
 
 ##Is it any good?
