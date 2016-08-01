@@ -20,6 +20,8 @@ class EpisodeIndexer
     end
   end
 
+  private
+
   def add_episode e
     if e["number"].present?
       episode_number = e["number"]
