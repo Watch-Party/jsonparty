@@ -5,7 +5,7 @@ class Feed < ApplicationRecord
                         :name
 
   belongs_to :episode
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :users, through: :posts
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
