@@ -9,7 +9,9 @@ class LiveChannel < ApplicationCable::Channel
     end
     episode_id = params["data"][0]["episode_id"]
     episode = Episode.find(episode_id)
-    feed = episode.feeds.find_by(name: "live")
+    unless feed = episode.feeds.find_by(name: "live")
+      reject
+    end
 
     #start stream
     stream_from "#{feed.id}"
