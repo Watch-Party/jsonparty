@@ -30,7 +30,7 @@ class PartyChannel < ApplicationCable::Channel
       post_id:    nil,
       content:    "Welcome to #{feed.name}",
       username:   "Watch Party",
-      thumb_url:  "https://watch-party.s3.amazonaws.com/uploads/user/avatar/4/thumb_admin-account-dnn7-1.png",
+      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
       timestamp:  time_in_channel(feed),
       pops:       42
   end
