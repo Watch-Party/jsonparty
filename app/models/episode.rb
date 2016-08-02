@@ -15,6 +15,7 @@ class Episode < ApplicationRecord
   has_many :comments, through: :posts
   belongs_to :show
 
+  #custom validation to make sure no season/episode duplicates
   def can_only_have_one_episode_number_per_season
     if self.show.episodes.find_by(season: self.season, episode_number: self.episode_number).present? &&
         (self.episode_number != "special")

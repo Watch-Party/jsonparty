@@ -1,5 +1,6 @@
 class Feed < ApplicationRecord
 
+  #species used as another word for 'type'
   validates_presence_of :species,
                         :name
 
