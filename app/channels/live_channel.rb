@@ -1,22 +1,19 @@
 class LiveChannel < ApplicationCable::Channel
   def subscribed
-    # show = params["data"][0]["show"]
-    # season = params["data"][0]["season"]
-    # episode = params["data"][0]["episode"]
-
-    episode_id = params["data"][0]["episode_id"]
-
-    unless user = User.find(params["data"][1]["user_id"])
-      reject
-    end
 
     stop_all_streams
 
-    # show = Show.find_by(title: show)
+    #initialization
+    unless user = User.find(params["data"][1]["user_id"])
+      reject
+    end
+    episode_id = params["data"][0]["episode_id"]
     episode = Episode.find(episode_id)
     feed = episode.feeds.find_by(name: "live")
 
+    #start stream
     stream_from "#{feed.id}"
+
   end
 
   def unsubscribed
@@ -24,20 +21,15 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    # show = params["data"][0]["show"]
-    # season = params["data"][0]["season"]
-    # episode = params["data"][0]["episode"]
 
-    episode_id = params["data"][0]["episode_id"]
-
-    content = data["message"]["content"]
-
+    #initialization
     user = User.find params["data"][1]["user_id"]
-
-    # show = Show.find_by(title: show)
+    episode_id = params["data"][0]["episode_id"]
     episode = Episode.find(episode_id)
     feed = episode.feeds.find_by(name: "live")
+    content = data["message"]["content"]
 
+    #create post and send it to broadcast worker
     post = feed.posts.new(
                           content: content,
                           time_in_episode: Time.now - episode.air_date,
@@ -48,33 +40,33 @@ class LiveChannel < ApplicationCable::Channel
   end
 
   def pop(data)
+
+    #initialization
     user = User.find params["data"][1]["user_id"]
-
     post = Post.find(data["message"]["post_id"])
-    post.upvote_by user
 
+    #pop(upvote) post and sent to broadcast worker
+    post.upvote_by user
     PopBroadcastWorker.perform_async post.id, user.id
 
   end
 
   def comment(data)
+
+    #initialization
     user = User.find params["data"][1]["user_id"]
-
     episode_id = params["data"][0]["episode_id"]
-
-    post = Post.find(data["message"]["post_id"])
-
     episode = Episode.find(episode_id)
-
+    post = Post.find(data["message"]["post_id"])
     feed = post.feed
-
     content = data["message"]["content"]
 
+    #create comment and send it to broadcast worker
     comment = post.comments.new(
                                 content: content,
                                 user: user,
                                 time_in_episode: Time.now - episode.air_date,
-                                feed_id: feed.id
+                                feed: feed
                                 )
     comment.save
 
