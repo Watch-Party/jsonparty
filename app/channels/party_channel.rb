@@ -29,7 +29,7 @@ class PartyChannel < ApplicationCable::Channel
     ActionCable.server.broadcast "#{personal_feed.id}",
       feed_name:  feed.name,
       post_id:    post.id,
-      content:    "Welcome to #{feed.name}",
+      content:    "Welcome to '#{feed.name}'",
       username:   "Watch Party",
       thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
       timestamp:  time_in_channel(feed),
