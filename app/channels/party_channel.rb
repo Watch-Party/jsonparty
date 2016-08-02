@@ -3,18 +3,20 @@ class PartyChannel < ApplicationCable::Channel
 
     stop_all_streams
 
+    #initialization
     unless user = User.find(params["data"][1]["user_id"])
       reject
     end
-
-    viewtype = params["data"][2]["viewtype"]
 
     feed_name = params["data"][3]["feed_name"]
     unless feed = Feed.find_by(name: feed_name)
       reject
     end
 
+    viewtype = params["data"][2]["viewtype"]
 
+
+    #start stream
     stream_from "#{feed.id}"
 
     ActionCable.server.broadcast "#{feed.id}",
@@ -28,12 +30,12 @@ class PartyChannel < ApplicationCable::Channel
 
   def start(data)
 
+    #initialization
     user = User.find(params["data"][1]["user_id"])
-
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
     viewtype = params["data"][2]["viewtype"]
 
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
-
+    #room can only start once
     unless feed.start_time.present?
       feed.start_time = Time.now
       feed.save
@@ -45,18 +47,19 @@ class PartyChannel < ApplicationCable::Channel
 
   def post(data)
 
+    #initialization
+    user = User.find params["data"][1]["user_id"]
+    feed = Feed.find_by(name: params["data"][3]["feed_name"])
     content = data["message"]["content"]
 
-    user = User.find params["data"][1]["user_id"]
-
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
-
+    #posts made before feed start are time_in_episode = 0
     if feed.start_time.present?
       time_in_episode = Time.now - feed.start_time
     else
       time_in_episode = 0
     end
 
+    #create post and send it to broadcast worker
     post = feed.posts.new(
                           content: content,
                           time_in_episode: time_in_episode,
@@ -67,32 +70,34 @@ class PartyChannel < ApplicationCable::Channel
   end
 
   def pop(data)
+
+    #initialization
     user = User.find params["data"][1]["user_id"]
-
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
-
     post = Post.find(data["message"]["post_id"])
-    post.upvote_by user
 
+    #pop(upvote) post and sent to broadcast worker
+    post.upvote_by user
     PopBroadcastWorker.perform_async post.id, user.id, feed.id
 
   end
 
   def comment(data)
+
+    #initialization
     user = User.find params["data"][1]["user_id"]
-
-    post = Post.find(data["message"]["post_id"])
-
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    post = Post.find(data["message"]["post_id"])
+    content = data["message"]["content"]
 
+    #commentss made before feed start are time_in_episode = 0
     if feed.start_time.present?
       time_in_episode = Time.now - feed.start_time
     else
       time_in_episode = 0
     end
 
-    content = data["message"]["content"]
-
+    #create comment and send it to broadcast worker
     comment = post.comments.new(
                                 content: content,
                                 user: user,
