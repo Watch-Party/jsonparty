@@ -1,12 +1,18 @@
 class ShowFinder
 
+  #service object that searches for a show (by title/showname), saves the results to the db, and returns the results
   def initialize showname
     @showname = showname
   end
 
+  #method that seaches/saves/returns
   def options
     shows = []
+
+    #API call to tvmaze
     resp = HTTParty.get "http://api.tvmaze.com/search/shows?q=#{@showname}"
+
+    #saves each responce to db, pushes into shows array
     resp.each do |s|
 
       if s["show"]["image"].present?
