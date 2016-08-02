@@ -1,20 +1,13 @@
 class PartyChannel < ApplicationCable::Channel
   def subscribed
-    # show = params["data"][0]["show"]
-    # season = params["data"][0]["season"]
-    # episode = params["data"][0]["episode"]
 
-    # episode_id = params["data"][0]["episode_id"]
+    stop_all_streams
 
     unless user = User.find(params["data"][1]["user_id"])
       reject
     end
 
     viewtype = params["data"][2]["viewtype"]
-
-    stop_all_streams
-
-    # episode = Episode.find(episode_id)
 
     feed_name = params["data"][3]["feed_name"]
     unless feed = Feed.find_by(name: feed_name)
@@ -26,10 +19,6 @@ class PartyChannel < ApplicationCable::Channel
 
     ActionCable.server.broadcast "#{feed.id}",
       welcome: "You are in party channel #{feed.name}"
-
-
-    # df = DelayedFeed.new feed, viewtype, user
-    # df.start
 
   end
 
@@ -55,11 +44,6 @@ class PartyChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    # show = params["data"][0]["show"]
-    # season = params["data"][0]["season"]
-    # episode = params["data"][0]["episode"]
-
-    episode_id = params["data"][0]["episode_id"]
 
     content = data["message"]["content"]
 
@@ -85,8 +69,6 @@ class PartyChannel < ApplicationCable::Channel
   def pop(data)
     user = User.find params["data"][1]["user_id"]
 
-    episode_id = params["data"][0]["episode_id"]
-
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
 
     post = Post.find(data["message"]["post_id"])
@@ -100,8 +82,6 @@ class PartyChannel < ApplicationCable::Channel
     user = User.find params["data"][1]["user_id"]
 
     post = Post.find(data["message"]["post_id"])
-
-    episode_id = params["data"][0]["episode_id"]
 
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
 
