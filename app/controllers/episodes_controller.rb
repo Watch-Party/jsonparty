@@ -67,7 +67,7 @@ class EpisodesController < ApplicationController
 
   def get_feed_name(episode)
     name = "#{episode.title}:#{sprintf '%05d', rand(1..999999)}"
-    if Feed.find_by(name: name)
+    if Feed.find_by(name: name).present?
       get_feed_name(episode)
     else
       name
