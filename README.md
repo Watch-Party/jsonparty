@@ -1,5 +1,5 @@
 # Spoiler Alert!
-## The REST json API for Watch Party!
+## The REST json API and websocket server for [Watch Party](https://watch-party.firebaseapp.com)!
 "Your Shows, Your Friends, On Your Time"
 
 ## To log in
