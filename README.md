@@ -2,73 +2,6 @@
 ## The REST json API and websocket server for [Watch Party](https://watch-party.firebaseapp.com)!
 "Your Shows, Your Friends, On Your Time"
 
-## To log in
-####POST "https://wp-spoileralert.herokuapp.com/auth/sign_in"
-
-**request**
-
-body:
-
-
-
-            {
-              email: email,
-              password: password
-            }
-
-
-
-**response**
-
-body:
-
-
-
-            {
-              "id":5,
-              "email":"something@example.com",
-              "created_at":"2016-07-18T21:35:19.926Z",
-              "updated_at":"2016-07-18T21:35:19.930Z",
-              "avatar_url":nil,
-              "bio":nil,
-              "screen_name":"preteenwithapredatorhead",
-              "location":nil,
-              "first_name":"Brad",
-              "last_name":"Neely",
-              "avatar": avatar url stuff
-            }
-
-
-
-
-
-## To sign up
-####POST "https://wp-spoileralert.herokuapp.com/auth"
-
-**request**
-
-body:
-
-
-
-              {
-                email: email,
-                password: password,
-                password_confirmation: password,
-                first_name: first,
-                last_name: last,
-                screen_name: sr
-              }
-
-
-
-
-**response**
-
-                  OK
-
-Will send confirmation email to user
-
 
 ## To update user
 ####PATCH or PUT "https://wp-spoileralert.herokuapp.com/auth"
@@ -109,7 +42,6 @@ only need fields that are being changed
               "email":"something@example.com",
               "created_at":"2016-07-18T21:35:19.926Z",
               "updated_at":"2016-07-18T21:35:19.930Z",
-              "avatar_url":nil,
               "bio":nil,
               "screen_name":"preteenwithapredatorhead",
               "location":nil,
