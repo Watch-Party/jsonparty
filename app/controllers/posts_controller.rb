@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
 
+  #gets all posts that were posted before episode started
   def index
     showname = params[:showname].gsub(/\_/," ")
     show = Show.find_by('lower(title) = ?', showname.downcase)
