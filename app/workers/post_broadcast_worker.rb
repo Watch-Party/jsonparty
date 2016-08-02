@@ -14,6 +14,7 @@ class PostBroadcastWorker
     end
 
     ActionCable.server.broadcast "#{feed_id}",
+      feed_name:  post.feed.name,
       post_id:    post.id,
       content:    post.content,
       username:   post.user.screen_name,

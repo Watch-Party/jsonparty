@@ -31,14 +31,13 @@ class PartyChannel < ApplicationCable::Channel
     #initialization
     user = User.find(params["data"][1]["user_id"])
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
-    viewtype = params["data"][2]["viewtype"]
 
     #room can only start once
     unless feed.start_time.present?
       feed.start_time = Time.now
       feed.save
 
-      df = DelayedFeed.new feed, viewtype, user
+      df = DelayedFeed.new feed, "all", user
       df.start
 
       ActionCable.server.broadcast "#{feed.id}",
