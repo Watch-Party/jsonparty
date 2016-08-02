@@ -27,8 +27,7 @@ body:
               }
 
 
-only need avatar file or remote avatar url, not both
-
+only need avatar file OR remote avatar url, not both
 
 only need fields that are being changed
 
@@ -80,7 +79,7 @@ no additional info needed
 
 
 
-## To get posts for an episode (only posts before episode started)
+## To get posts for an episode (only posts before episode start time)
 ####GET "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
 
 **request**
@@ -167,23 +166,17 @@ no additional info needed
                 {
                   id: 2,
                   title: "Game of Thrones",
-                  img_url: img url stuff,
-                  total_posts: 1585,
-                  last_episode_posts: 1
+                  img_url: img url stuff
                 },
                 {
                   id: 26,
                   title: "Preacher",
-                  img_url: img url stuff,
-                  total_posts: 186,
-                  last_episode_posts: 186
+                  img_url: img url stuff
                 },
                 {
                 id: 3,
                   title: "Doctor Who",
-                  img_url: img url stuff,
-                  total_posts: 72,
-                  last_episode_posts: 34
+                  img_url: img url stuff
                 }
               ]
             }
