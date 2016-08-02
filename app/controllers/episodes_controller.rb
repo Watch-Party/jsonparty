@@ -6,13 +6,8 @@ class EpisodesController < ApplicationController
     @episode = Episode.find params[:id]
   end
 
-  def index
-    @show = Show.find params[:id]
-    @episodes = @show.episodes.all
-  end
-
   def upcoming
-    @episodes = Episode.where(:air_date => Time.now..7.days.from_now).order(:air_date).includes(:show)
+    @episodes = Episode.where(:air_date => Time.now..3.days.from_now).order(:air_date).includes(:show)
   end
 
   def get_id
@@ -43,23 +38,6 @@ class EpisodesController < ApplicationController
       respond_to do |format|
         format.json { render json: { status: "Unable to process this request"} }
       end
-    end
-  end
-
-  def create
-    @show = Show.find params[:id]
-    @episode = @show.episodes.new
-  end
-
-  def update
-    @show = Show.find params[:id]
-  end
-
-  def destroy
-    @episode = Episode.find params[:id]
-    @episode.destroy
-    respond_to do |format|
-      format.json { render json: { status: :ok} }
     end
   end
 
