@@ -24,7 +24,7 @@ class DelayedChannel < ApplicationCable::Channel
     #welcome to feed post
     post = Post.find(42) #db post made for this purpose
     ActionCable.server.broadcast "#{feed.id}",
-      feed_name:  feed.name,
+      # feed_name:  feed.name,
       post_id:    post.id,
       content:    "Welcome to '#{feed.name}'",
       username:   "Watch Party",
