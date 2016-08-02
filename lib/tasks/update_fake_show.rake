@@ -1,4 +1,4 @@
-
+#no longer needed
 desc 'Get real info for the test show'
 task update_fake_show: :environment do
   Show.find_each do |show|

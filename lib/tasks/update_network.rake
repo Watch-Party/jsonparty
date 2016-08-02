@@ -1,5 +1,5 @@
 
-desc 'Add network to existing shows'
+desc 'Updates airing network for shows (in case they change)'
 task update_network: :environment do
   Show.find_each do |show|
     if show.confirmed == true
@@ -13,7 +13,7 @@ task update_network: :environment do
       else
         puts "Could not update #{show.title}"
       end
-      
+
     end
   end
 end
