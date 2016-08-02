@@ -29,7 +29,7 @@ class DelayedChannel < ApplicationCable::Channel
       content:    "Welcome to '#{feed.name}'",
       username:   "Watch Party",
       thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
-      timestamp:  Time.now - feed.start_time,
+      timestamp:  Time.at(Time.now - feed.start_time).utc.strftime("%M:%S"),
       pops:       post.cached_votes_total
 
     #queue up posts for delayed
