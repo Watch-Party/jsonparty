@@ -15,10 +15,22 @@ class DelayedChannel < ApplicationCable::Channel
     feed = episode.feeds.create(
                             species: "delayed",
                             start_time: Time.now,
-                            name: "#{episode.id}:#{user.id}"
+                            name: "delayed:#{episode.id}:#{user.id}"
                             )
 
+    #start stream
     stream_from "#{feed.id}"
+
+    #welcome to feed post
+    post = Post.find(42) #db post made for this purpose
+    ActionCable.server.broadcast "#{feed.id}",
+      feed_name:  feed.name,
+      post_id:    post.id,
+      content:    "Welcome to '#{feed.name}'",
+      username:   "Watch Party",
+      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
+      timestamp:  Time.now - feed.start_time,
+      pops:       post.cached_votes_total
 
     #queue up posts for delayed
     df = DelayedFeed.new feed, viewtype, user
