@@ -40,6 +40,9 @@ class PartyChannel < ApplicationCable::Channel
 
       df = DelayedFeed.new feed, viewtype, user
       df.start
+
+      ActionCable.server.broadcast "#{feed.id}",
+        status: :started
     end
   end
 
