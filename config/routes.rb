@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   get '/search/shows' => 'search#shows'
   get '/episodes/:id' => 'episodes#info'
   get '/upcoming' => 'episodes#upcoming'
-  get '/recent' => 'shows#recent'
+  get '/recent' => 'shows#recent_for_user'
   # get '/search' => 'search#search'
 
 end
