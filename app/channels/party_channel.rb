@@ -11,8 +11,6 @@ class PartyChannel < ApplicationCable::Channel
     unless feed = Feed.find_by('lower(name) = ?', feed_name.downcase)
       reject
     end
-    viewtype = params["data"][2]["viewtype"]
-
 
     #start stream
     stream_from "#{feed.id}"
