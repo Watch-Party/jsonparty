@@ -33,7 +33,7 @@ class EpisodesController < ApplicationController
     episode = Episode.find(params[:episode_id])
     feed = episode.feeds.new(
                             species: "delayed",
-                            name: "#{episode.title}:#{sprintf '%05d', rand(1..99999)}"
+                            name: get_feed_name(episode)
                             )
     if feed.save
       respond_to do |format|
@@ -60,6 +60,17 @@ class EpisodesController < ApplicationController
     @episode.destroy
     respond_to do |format|
       format.json { render json: { status: :ok} }
+    end
+  end
+
+  private
+
+  def get_feed_name(episode)
+    name = "#{episode.title}:#{sprintf '%05d', rand(1..999999)}"
+    if Feed.find_by(name: name)
+      get_feed_name(episode)
+    else
+      name
     end
   end
 end
