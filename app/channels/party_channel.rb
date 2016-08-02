@@ -12,7 +12,6 @@ class PartyChannel < ApplicationCable::Channel
       reject
     end
     viewtype = params["data"][2]["viewtype"]
-    Show.find_by('lower(title) = ?', showname.downcase)
 
 
     #start stream
