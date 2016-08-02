@@ -8,15 +8,24 @@ class PartyChannel < ApplicationCable::Channel
       reject
     end
     feed_name = params["data"][3]["feed_name"]
-    unless feed = Feed.find_by('lower(name) = ?', feed_name.downcase)
+    if feed = Feed.find_by('lower(name) = ?', feed_name.downcase)
+      #create personal feed for private posts (not fully emplimented)
+      episode = feed.episode
+      personal_feed = episode.feeds.create(
+                              species: "personal party",
+                              start_time: Time.now,
+                              name: "#{feed.name}:#{user.id}"
+                              )
+    else
       reject
     end
 
     #start stream
     stream_from "#{feed.id}"
+    stream_from "#{personal_feed.id}"
 
     #welcome to feed post
-    ActionCable.server.broadcast "#{feed.id}",
+    ActionCable.server.broadcast "#{personal_feed.id}",
       feed_name:  feed.name,
       post_id:    nil,
       content:    "Welcome to #{feed.name}",
