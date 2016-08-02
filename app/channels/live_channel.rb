@@ -9,12 +9,31 @@ class LiveChannel < ApplicationCable::Channel
     end
     episode_id = params["data"][0]["episode_id"]
     episode = Episode.find(episode_id)
-    unless feed = episode.feeds.find_by(name: "live")
+    if feed = episode.feeds.find_by(name: "live")
+      #create personal feed for private posts (not fully emplimented)
+      personal_feed = episode.feeds.create(
+                              species: "personal live",
+                              start_time: Time.now,
+                              name: "live:#{episode_id}:#{user.id}"
+                              )
+    else
       reject
     end
 
     #start stream
     stream_from "#{feed.id}"
+    stream_from "#{personal_feed.id}"
+
+    #welcome to feed post
+    post = Post.find(42) #db post made for this purpose
+    ActionCable.server.broadcast "#{personal_feed.id}",
+      feed_name:  feed.name,
+      post_id:    post.id,
+      content:    "Welcome to '#{episode.title}:live",
+      username:   "Watch Party",
+      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
+      timestamp:  Time.now - episode.air_date,
+      pops:       post.cached_votes_total
 
   end
 
