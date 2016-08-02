@@ -15,9 +15,15 @@ class PartyChannel < ApplicationCable::Channel
     #start stream
     stream_from "#{feed.id}"
 
+    #welcome to feed post
     ActionCable.server.broadcast "#{feed.id}",
-      welcome: "You are in party channel #{feed.name}"
-
+      feed_name:  feed.name,
+      post_id:    nil,
+      content:    "Welcome to #{feed.name}",
+      username:   "Watch Party",
+      thumb_url:  "https://watch-party.s3.amazonaws.com/uploads/user/avatar/4/thumb_admin-account-dnn7-1.png",
+      timestamp:  time_in_channel(feed),
+      pops:       42
   end
 
   def unsubscribed
@@ -50,17 +56,10 @@ class PartyChannel < ApplicationCable::Channel
     feed = Feed.find_by(name: params["data"][3]["feed_name"])
     content = data["message"]["content"]
 
-    #posts made before feed start are time_in_episode = 0
-    if feed.start_time.present?
-      time_in_episode = Time.now - feed.start_time
-    else
-      time_in_episode = 0
-    end
-
     #create post and send it to broadcast worker
     post = feed.posts.new(
                           content: content,
-                          time_in_episode: time_in_episode,
+                          time_in_episode: time_in_channel(feed),
                           user: user
                           )
     post.save
@@ -88,20 +87,24 @@ class PartyChannel < ApplicationCable::Channel
     post = Post.find(data["message"]["post_id"])
     content = data["message"]["content"]
 
-    #comments made before feed start are time_in_episode = 0
-    if feed.start_time.present?
-      time_in_episode = Time.now - feed.start_time
-    else
-      time_in_episode = 0
-    end
-
     #create comment and send it to broadcast worker
     comment = post.comments.new(
                                 content: content,
                                 user: user,
-                                time_in_episode: time_in_episode,
+                                time_in_episode: time_in_channel(feed),
                                 feed: feed)
     comment.save
 
+  end
+
+  private
+
+  #posts and comments made before feed start are time_in_episode = 0
+  def time_in_channel(feed)
+    if feed.start_time.present?
+      Time.now - feed.start_time
+    else
+      0
+    end
   end
 end
