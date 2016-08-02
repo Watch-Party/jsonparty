@@ -1,6 +1,8 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
+  #largely unused (permissions are handeled with front-end/back-end touch points)
+
   def initialize(user, record)
     @user = user
     @record = record
