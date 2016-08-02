@@ -2,7 +2,7 @@ class Admins::ShowsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @shows = Show.where(confirmed: true)
+    @shows = Show.where(confirmed: true).order(:title)
   end
 
   def new
