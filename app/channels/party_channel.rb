@@ -25,14 +25,15 @@ class PartyChannel < ApplicationCable::Channel
     stream_from "#{personal_feed.id}"
 
     #welcome to feed post
+    post = Post.find(42) #db post made for this purpose
     ActionCable.server.broadcast "#{personal_feed.id}",
       feed_name:  feed.name,
-      post_id:    nil,
+      post_id:    post.id,
       content:    "Welcome to #{feed.name}",
       username:   "Watch Party",
       thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
       timestamp:  time_in_channel(feed),
-      pops:       42
+      pops:       post.cached_votes_total
   end
 
   def unsubscribed
