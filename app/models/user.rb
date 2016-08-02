@@ -18,6 +18,7 @@ class User < ApplicationRecord
   #        :recoverable, :rememberable, :trackable, :validatable,
   #        :confirmable
 
+  validate :screen_name_cannot_include
   validates_uniqueness_of :screen_name
 
   mount_uploader :avatar, AvatarUploader
@@ -37,4 +38,14 @@ class User < ApplicationRecord
                         Watch.create(watcher: self,
                                       watched: self)
                        }
+
+  def screen_name_cannot_include
+    disallowed = ["watch party"]
+    disallowed.each do |d|
+      if self.screen_name.include?(d)
+        errors.add(:screen_name, "contains disallowed words")
+      end
+    end
+  end
+
 end
