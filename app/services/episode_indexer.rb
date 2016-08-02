@@ -28,21 +28,24 @@ class EpisodeIndexer
     else
       episode_number = "special"
     end
-    epi = @show.episodes.new(
-                      title: e["name"],
-                      air_date: e["airstamp"],
-                      runtime: e["runtime"],
-                      season: e["season"],
-                      episode_number: episode_number,
-                      tvrage_e_id: e["id"]
-                      )
-    epi.save!
 
-    if epi.air_date > Time.now
-      LiveFeedWorker.perform_at(
-                              (epi.air_date - (1.hours + 20.minutes)),
-                              epi.id
-                              )
+    if e["airstamp"]
+      epi = @show.episodes.new(
+                        title: e["name"],
+                        air_date: e["airstamp"],
+                        runtime: e["runtime"],
+                        season: e["season"],
+                        episode_number: episode_number,
+                        tvrage_e_id: e["id"]
+                        )
+      epi.save!
+
+      if epi.air_date > Time.now
+        LiveFeedWorker.perform_at(
+                                (epi.air_date - (1.hours + 20.minutes)),
+                                epi.id
+                                )
+      end
     end
   end
 end
