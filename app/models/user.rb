@@ -32,4 +32,9 @@ class User < ApplicationRecord
 
   has_many :watched, through: :watched_watches, source: :watched
   has_many :watched_watches, foreign_key: :watcher_id, class_name: 'Watch'
+
+  after_create_commit {
+                        Watch.create(watcher: self,
+                                      watched: self)
+                       }
 end
