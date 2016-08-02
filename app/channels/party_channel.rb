@@ -7,12 +7,10 @@ class PartyChannel < ApplicationCable::Channel
     unless user = User.find(params["data"][1]["user_id"])
       reject
     end
-
     feed_name = params["data"][3]["feed_name"]
     unless feed = Feed.find_by(name: feed_name)
       reject
     end
-
     viewtype = params["data"][2]["viewtype"]
 
 
@@ -90,7 +88,7 @@ class PartyChannel < ApplicationCable::Channel
     post = Post.find(data["message"]["post_id"])
     content = data["message"]["content"]
 
-    #commentss made before feed start are time_in_episode = 0
+    #comments made before feed start are time_in_episode = 0
     if feed.start_time.present?
       time_in_episode = Time.now - feed.start_time
     else
