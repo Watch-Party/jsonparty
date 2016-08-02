@@ -2,14 +2,17 @@ class EpisodesController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
 
+  #get information for one episode using the episode_id
   def info
     @episode = Episode.find params[:id]
   end
 
+  #get information for episodes that air in the next 3 days
   def upcoming
     @episodes = Episode.where(:air_date => Time.now..3.days.from_now).order(:air_date).includes(:show)
   end
 
+  #get the episode_id, given the showname, season number, and episode number
   def get_id
     showname = params[:showname].gsub(/\_/," ")
     show = Show.find_by('lower(title) = ?', showname.downcase)
@@ -24,6 +27,7 @@ class EpisodesController < ApplicationController
     end
   end
 
+  #create a new party feed for a given episode using its episode_id
   def new_party
     episode = Episode.find(params[:episode_id])
     feed = episode.feeds.new(
@@ -43,6 +47,7 @@ class EpisodesController < ApplicationController
 
   private
 
+  #recursive method for generating a feed name (checks to make sure not already in use)
   def get_feed_name(episode)
     name = "#{episode.title}:#{sprintf '%05d', rand(1..999999)}"
     if Feed.find_by(name: name).present?
