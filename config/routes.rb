@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :users, only: [:show, :destroy]
+  resources :users, only: [:show]
   # resources :watches, only: [:create, :destroy]
 
   # resources :shows, except: [:new, :edit] do
