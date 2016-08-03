@@ -22,7 +22,7 @@ class DelayedChannel < ApplicationCable::Channel
     stream_from "#{feed.id}"
 
     #welcome to feed post
-    WelcomeMessageWorker.perform_in(1.seconds, feed.id)
+    WelcomeMessageWorker.perform_in(2.seconds, feed.id)
 
     #queue up posts for delayed
     df = DelayedFeed.new feed, viewtype, user
