@@ -3,7 +3,7 @@ class Admins::ShowsController < ApplicationController
 
   #typical index method, ordered by demo status then show title
   def index
-    @shows = Show.where(confirmed: true).order(:demo).order(:title)
+    @shows = Show.where(confirmed: true).order(demo: :desc).order(:title)
   end
 
   #helper for new view
