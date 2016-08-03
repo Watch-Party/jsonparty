@@ -7,8 +7,7 @@ class DelayedChannel < ApplicationCable::Channel
     unless user = User.find(params["data"][1]["user_id"])
       reject
     end
-    episode_id = params["data"][0]["episode_id"]
-    episode = Episode.find(episode_id)
+    episode = Episode.find params["data"][0]["episode_id"]
     viewtype = params["data"][2]["viewtype"]
 
     #create personal feed and stream from it
@@ -38,7 +37,7 @@ class DelayedChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find params["data"][1]["user_id"]
-    episode_id = params["data"][0]["episode_id"]
+    episode = Episode.find params["data"][0]["episode_id"]
     feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     content = data["message"]["content"]
 
@@ -56,7 +55,7 @@ class DelayedChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find params["data"][1]["user_id"]
-    episode_id = params["data"][0]["episode_id"]
+    episode = Episode.find params["data"][0]["episode_id"]
     feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     post = Post.find(data["message"]["post_id"])
 
@@ -68,7 +67,7 @@ class DelayedChannel < ApplicationCable::Channel
 
   def comment(data)
     user = User.find params["data"][1]["user_id"]
-    episode_id = params["data"][0]["episode_id"]
+    episode = Episode.find params["data"][0]["episode_id"]
     feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     post = Post.find(data["message"]["post_id"])
     content = data["message"]["content"]
