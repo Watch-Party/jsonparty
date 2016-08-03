@@ -10,7 +10,7 @@ class SearchController < ApplicationController
 
   #search for shows by title (using pg_search_scope)
   def shows
-    @shows = Show.search_by_title(params[:criteria]).where(active: true)
+    @shows = Show.search_by_title(params[:criteria]).where(active: true, confirmed: true)
   end
 
   #unused search for show titles and user emails/screen_names (using pg_search multisearch)
