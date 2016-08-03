@@ -1,7 +1,7 @@
 class WelcomeMessageWorker
 
   def perform(feed_id)
-    feed = Feed.find(42)
+    feed = Feed.find(feed_id)
     ActionCable.server.broadcast "#{feed.id}",
       feed_name:  feed.name,
       post_id:    42,
