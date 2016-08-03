@@ -9,7 +9,7 @@ class WelcomeMessageWorker
       content:    "Welcome to '#{feed.name}'",
       username:   "Watch Party",
       thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/user/avatar/6/thumb_watchparty.jpg",
-      timestamp:  Time.at(Time.now - feed.start_time).utc.strftime("%M:%S"),
+      timestamp:  "--:--",
       pops:       42
 
   end
