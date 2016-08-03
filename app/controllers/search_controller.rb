@@ -5,7 +5,7 @@ class SearchController < ApplicationController
 
   #search for users by screen_name and email (using pg_search_scope)
   def users
-    @users = User.search_by_sn_and_email(params[:criteria])
+    @users = User.search_by_sn_and_email(params[:criteria]).where.not(confirmed_at: nil)
   end
 
   #search for shows by title (using pg_search_scope)
