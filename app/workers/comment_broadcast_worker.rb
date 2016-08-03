@@ -28,12 +28,12 @@ class CommentBroadcastWorker
   end
 
   def find_comments(comment, post)
-    post.comments.where("time_in_episode <= ?", comment.time_in_episode).includes(:user).map {|c|
+    post.comments.where("time_in_episode <= ?", comment.time_in_episode).order(:time_in_episode).includes(:user).map {|c|
       {comment_id:  c.id,
       content:      c.content,
       username:     c.user.screen_name,
       thumb_url:    c.user.avatar.thumb.url,
-      timestamp:    comment_time_in_episode(c)}}.reverse
+      timestamp:    comment_time_in_episode(c)}}
   end
 
   def comment_time_in_episode(comment)
