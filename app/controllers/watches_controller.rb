@@ -1,6 +1,7 @@
 class WatchesController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
+  before_action :authenticate_user!
 
   #creates a watching/watched relationship between current_user and another user by user_id
   def create

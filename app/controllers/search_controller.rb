@@ -1,6 +1,7 @@
 class SearchController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
+  before_action :authenticate_user!
 
   #search for users by screen_name and email (using pg_search_scope)
   def users

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
+  before_action :authenticate_user!
 
   #gets all posts that were posted before episode started
   def index

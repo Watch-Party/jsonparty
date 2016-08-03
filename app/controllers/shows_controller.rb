@@ -1,6 +1,7 @@
 class ShowsController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :set_format
+  before_action :authenticate_user!
 
   #get information for one show using the showname(title)
   def info
