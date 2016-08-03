@@ -33,9 +33,12 @@ class User < ApplicationRecord
   has_many :watched_watches, foreign_key: :watcher_id, class_name: 'Watch'
 
   #user watches themselves (for filtering on front end purposes) after creation
+  #user autowatches offical watch party user
   after_create_commit {
                         Watch.create(watcher: self,
-                                      watched: self)
+                                      watched: self),
+                        Watch.create(watcher: self,
+                                      watched_id: 6)
                        }
 
   #does not allow screen names to include certain words (will expand)
