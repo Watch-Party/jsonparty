@@ -25,7 +25,7 @@ class LiveChannel < ApplicationCable::Channel
     stream_from "#{personal_feed.id}"
 
     #welcome to feed post
-    WelcomeMessageWorker.perform_async(personal_feed.id)
+    WelcomeMessageWorker.perform_in(1.seconds, personal_feed.id)
   end
 
   def unsubscribed
