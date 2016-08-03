@@ -12,11 +12,11 @@ class DelayedFeed
     #viewtype all queues all posts for an episode
     #else only posts from friends/watched are queued
     if @viewtype == "all"
-      posts = @feed.episode.posts
-      comments = @feed.episode.comments
+      posts = @feed.episode.posts.where('time_in_episode > ?', 0)
+      comments = @feed.episode.comments.where('time_in_episode > ?', 0)
     else
-      posts = @feed.episode.posts.includes(:user)
-      comments = @feed.episode.comments.includes(:user)
+      posts = @feed.episode.posts.where('time_in_episode > ?', 0).includes(:user)
+      comments = @feed.episode.comments.where('time_in_episode > ?', 0).includes(:user)
 
       watched = @user.watched
 
