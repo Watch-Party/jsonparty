@@ -14,7 +14,7 @@ class PartyChannel < ApplicationCable::Channel
       personal_feed = episode.feeds.create(
                               species: "personal party",
                               start_time: Time.now,
-                              name: "#{feed.name}:#{user.id}"
+                              name: "feed_name"
                               )
     else
       reject

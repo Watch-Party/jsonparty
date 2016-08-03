@@ -15,7 +15,7 @@ class DelayedChannel < ApplicationCable::Channel
     feed = episode.feeds.create(
                             species: "delayed",
                             start_time: Time.now,
-                            name: "delayed:#{episode_id}:#{user.id}"
+                            name: "#{episode.title}:delayed:#{user.id}"
                             )
 
     #start stream

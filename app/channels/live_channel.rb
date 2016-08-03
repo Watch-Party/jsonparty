@@ -14,7 +14,7 @@ class LiveChannel < ApplicationCable::Channel
       personal_feed = episode.feeds.create(
                               species: "personal live",
                               start_time: Time.now,
-                              name: "live:#{episode_id}:#{user.id}"
+                              name: "#{episode.title}:live"
                               )
     else
       reject
