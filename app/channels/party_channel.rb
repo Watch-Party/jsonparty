@@ -36,7 +36,7 @@ class PartyChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find(params["data"][1]["user_id"])
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    feed = Feed.find_by(name: params["data"][3]["feed_name"], species: "delayed")
 
     #room can only start once
     unless feed.start_time.present?
@@ -54,7 +54,7 @@ class PartyChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find params["data"][1]["user_id"]
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    feed = Feed.find_by(name: params["data"][3]["feed_name"], species: "delayed")
     content = data["message"]["content"]
 
     #create post and send it to broadcast worker
@@ -71,7 +71,7 @@ class PartyChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find params["data"][1]["user_id"]
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    feed = Feed.find_by(name: params["data"][3]["feed_name"], species: "delayed")
     post = Post.find(data["message"]["post_id"])
 
     #pop(upvote) post and sent to broadcast worker
@@ -84,7 +84,7 @@ class PartyChannel < ApplicationCable::Channel
 
     #initialization
     user = User.find params["data"][1]["user_id"]
-    feed = Feed.find_by(name: params["data"][3]["feed_name"])
+    feed = Feed.find_by(name: params["data"][3]["feed_name"], species: "delayed")
     post = Post.find(data["message"]["post_id"])
     content = data["message"]["content"]
 
