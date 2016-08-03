@@ -22,15 +22,7 @@ class DelayedChannel < ApplicationCable::Channel
     stream_from "#{feed.id}"
 
     #welcome to feed post
-    post = Post.find(42) #db post made for this purpose
-    ActionCable.server.broadcast "#{feed.id}",
-      feed_name:  feed.name,
-      post_id:    post.id,
-      content:    "Welcome to '#{feed.name}'",
-      username:   "Watch Party",
-      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/user/avatar/6/thumb_watchparty.jpg",
-      timestamp:  Time.at(Time.now - feed.start_time).utc.strftime("%M:%S"),
-      pops:       post.cached_votes_total
+    WelcomeMessageWorker.perform_in(1.seconds, feed.id)
 
     #queue up posts for delayed
     df = DelayedFeed.new feed, viewtype, user

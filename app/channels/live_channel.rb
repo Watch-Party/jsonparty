@@ -25,15 +25,7 @@ class LiveChannel < ApplicationCable::Channel
     stream_from "#{personal_feed.id}"
 
     #welcome to feed post
-    post = Post.find(42) #db post made for this purpose
-    ActionCable.server.broadcast "#{personal_feed.id}",
-      feed_name:  feed.name,
-      post_id:    post.id,
-      content:    "Welcome to '#{episode.title}:live",
-      username:   "Watch Party",
-      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/user/avatar/6/thumb_watchparty.jpg",
-      timestamp:  ((Time.now - episode.air_date) < 0) ? "-#{(Time.at(-(Time.now - episode.air_date)).utc.strftime("%M:%S"))}" : Time.at(Time.now - episode.air_date).utc.strftime("%M:%S"),
-      pops:       post.cached_votes_total
+    WelcomeMessageWorker.perform_in(1.seconds, personal_feed.id)
   end
 
   def unsubscribed
