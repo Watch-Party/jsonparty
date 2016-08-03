@@ -1,9 +1,9 @@
 class Admins::ShowsController < ApplicationController
   before_action :authenticate_admin!
 
-  #typical index method, ordered by show title
+  #typical index method, ordered by demo status then show title
   def index
-    @shows = Show.where(confirmed: true).order(:title)
+    @shows = Show.where(confirmed: true).order(:demo).order(:title)
   end
 
   #helper for new view
