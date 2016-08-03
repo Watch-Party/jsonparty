@@ -1,4 +1,5 @@
 class WelcomeMessageWorker
+  include Sidekiq::Worker
 
   def perform(feed_id)
     feed = Feed.find(feed_id)
