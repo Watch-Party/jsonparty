@@ -13,10 +13,14 @@ json.show do
     json.upcoming_title    "TBA"
     json.upcoming_date     "TBA"
   end
-
-  json.recent_id          @recent.id
-  json.recent_title       @recent.title
-  json.recent_date        @recent.air_date.in_time_zone('Eastern Time (US & Canada)').strftime("%B %-d, %Y - %I:%M%p EST")
+  if @recent.present?
+    json.recent_id          @recent.id
+    json.recent_title       @recent.title
+    json.recent_date        @recent.air_date.in_time_zone('Eastern Time (US & Canada)').strftime("%B %-d, %Y - %I:%M%p EST")
+  else
+    json.recent_title    "None"
+    json.recent_date     "None"
+  end
 
   json.seasons (1..@show.seasons).reverse_each do |season|
     json.season     season
