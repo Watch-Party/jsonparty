@@ -41,9 +41,8 @@ class PartyChannel < ApplicationCable::Channel
     #room can only start once
     unless feed.start_time.present?
       feed.start_time = Time.now
-      feed.save
-
       df = DelayedFeed.new feed, "all", user
+      feed.save
       df.start
 
       ActionCable.server.broadcast "#{feed.id}",
