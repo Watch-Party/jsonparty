@@ -31,7 +31,7 @@ class LiveChannel < ApplicationCable::Channel
       post_id:    post.id,
       content:    "Welcome to '#{episode.title}:live",
       username:   "Watch Party",
-      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/fallback/thumb_stylized-retro-tv-15240194.jpg",
+      thumb_url:  "https://s3.amazonaws.com/watch-party/uploads/user/avatar/6/thumb_watchparty.jpg",
       timestamp:  ((Time.now - episode.air_date) < 0) ? "-#{(Time.at(-(Time.now - episode.air_date)).utc.strftime("%M:%S"))}" : Time.at(Time.now - episode.air_date).utc.strftime("%M:%S"),
       pops:       post.cached_votes_total
   end
