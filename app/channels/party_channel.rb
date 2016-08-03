@@ -25,7 +25,7 @@ class PartyChannel < ApplicationCable::Channel
     stream_from "#{personal_feed.id}"
 
     #welcome to feed post
-    WelcomeMessageWorker.perform_async(feed.id)
+    WelcomeMessageWorker.perform_async(personal_feed.id)
   end
 
   def unsubscribed
