@@ -1,6 +1,7 @@
 class LiveFeedWorker
   include Sidekiq::Worker
 
+  #worker object that creates offical live feed for an episode
   def perform(episode_id)
     epi = Episode.find episode_id
 
