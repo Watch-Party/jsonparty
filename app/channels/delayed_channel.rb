@@ -39,7 +39,7 @@ class DelayedChannel < ApplicationCable::Channel
     #initialization
     user = User.find params["data"][1]["user_id"]
     episode_id = params["data"][0]["episode_id"]
-    feed = Feed.where(name: "delayed:#{episode_id}:#{user.id}").last
+    feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     content = data["message"]["content"]
 
     #create post and send it to broadcast worker
@@ -57,7 +57,7 @@ class DelayedChannel < ApplicationCable::Channel
     #initialization
     user = User.find params["data"][1]["user_id"]
     episode_id = params["data"][0]["episode_id"]
-    feed = Feed.where(name: "delayed:#{episode_id}:#{user.id}").last
+    feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     post = Post.find(data["message"]["post_id"])
 
     #pop(upvote) post and sent to broadcast worker
@@ -69,7 +69,7 @@ class DelayedChannel < ApplicationCable::Channel
   def comment(data)
     user = User.find params["data"][1]["user_id"]
     episode_id = params["data"][0]["episode_id"]
-    feed = Feed.where(name: "delayed:#{episode_id}:#{user.id}").last
+    feed = Feed.where(name: "#{episode.title}:delayed:#{user.id}").last
     post = Post.find(data["message"]["post_id"])
     content = data["message"]["content"]
 
