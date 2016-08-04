@@ -11,6 +11,7 @@ class EpisodesController < ApplicationController
   #get information for episodes that air in the next 3 days
   def upcoming
     @episodes = Episode.where(:air_date => Time.now..3.days.from_now).order(:air_date).includes(:show)
+    @current = Episode.where("air_date <= ? AND end_time >= ?", Time.now, Time.now).order(:air_date).includes(:show)
   end
 
   #get the episode_id, given the showname, season number, and episode number
