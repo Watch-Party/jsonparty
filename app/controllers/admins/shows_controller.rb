@@ -28,6 +28,7 @@ class Admins::ShowsController < ApplicationController
       redirect_to '/admins/show/new'
     else
       show.confirmed = true
+      show.demo = true
       sfinder = SeasonsFinder.new show
       show.seasons = sfinder.seasons
       if show.save
