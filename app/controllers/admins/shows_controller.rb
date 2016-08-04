@@ -1,9 +1,9 @@
 class Admins::ShowsController < ApplicationController
   before_action :authenticate_admin!
 
-  #typical index method, ordered by demo status then show title
+  #typical index method, ordered by show title
   def index
-    @shows = Show.where(confirmed: true).order(demo: :desc).order(:title)
+    @shows = Show.where(confirmed: true).order(:title)
   end
 
   #helper for new view
@@ -28,7 +28,6 @@ class Admins::ShowsController < ApplicationController
       redirect_to '/admins/show/new'
     else
       show.confirmed = true
-      show.demo = true
       sfinder = SeasonsFinder.new show
       show.seasons = sfinder.seasons
       if show.save
