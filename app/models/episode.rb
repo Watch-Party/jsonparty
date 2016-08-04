@@ -1,7 +1,8 @@
 class Episode < ApplicationRecord
 
   validates_uniqueness_of :tvrage_e_id
-  validate :can_only_have_one_episode_number_per_season
+  validate :can_only_have_one_episode_number_per_season, on: :create
+
 
   validates_presence_of :title,
                         :air_date,
