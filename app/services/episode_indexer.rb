@@ -51,7 +51,7 @@ class EpisodeIndexer
                         season: e["season"],
                         episode_number: episode_number,
                         tvrage_e_id: e["id"],
-                        end_time: e["airstamp"] + e["runtime"].minutes
+                        end_time: e["airstamp"] + e["runtime"].to_i.minutes
                         )
       epi.save!
 
