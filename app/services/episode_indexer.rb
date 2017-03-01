@@ -46,7 +46,7 @@ class EpisodeIndexer
     if e["airstamp"]
       epi = @show.episodes.new(
                         title: e["name"],
-                        air_date: e["airstamp"],
+                        air_date: e["airstamp"].to_time,
                         runtime: e["runtime"],
                         season: e["season"],
                         episode_number: episode_number,
@@ -56,12 +56,18 @@ class EpisodeIndexer
       epi.save!
 
       #queues up creation of a live feed for upcoming episodes (to be created an hour and 20 min before the airtime)
-      if epi.air_date > Time.now
-        LiveFeedWorker.perform_at(
-                                (epi.air_date - (1.hours + 20.minutes)),
-                                epi.id
-                                )
-      end
+      # if epi.air_date > Time.now
+      #   LiveFeedWorker.perform_at(
+      #                           (epi.air_date - (1.hours + 20.minutes)),
+      #                           epi.id
+      #                           )
+      # end
+
+      #creates a live feed for upcoming episodes (no longer delayed, because Im not paying for persistent redis)
+      epi.feeds.create!(species: "live",
+                        start_time: epi.air_date,
+                        name: "live"
+                        )ß
     end
   end
 end
