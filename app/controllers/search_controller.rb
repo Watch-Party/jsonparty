@@ -20,7 +20,7 @@ class SearchController < ApplicationController
 
   #default search results (before the user had typed anything), displays popular and recently added shows
   def init
-    @recent = Show.where(confirmed: true, active: true, :created_at => 1.weeks.ago..Time.now)
+    @recent = Show.where(confirmed: true, active: true).order("created_at DESC").limit(8)
     @popular = Show.where(confirmed: true, active: true).select('shows.*, COUNT(posts.id) post_count').joins(:posts).group("shows.id").order("post_count DESC").limit(8)
   end
 
