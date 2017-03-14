@@ -15,6 +15,8 @@ class SeasonsFinder
       #deletes seasons if the premiere is not announced
       current_seasons = resp.map { |s| s["premiereDate"]}.delete_if { |date| date.nil?}
       current_seasons.length
+    else
+      1
     end
   end
 end
