@@ -1,5 +1,5 @@
 # Spoiler Alert!
-## The REST json API and websocket server for [Watch Party](https://watch-party.firebaseapp.com)!
+## The REST json API and websocket server for [Watch Party](https://watchparty.online)!
 "Your Shows, Your Friends, On Your Time"
 
 
