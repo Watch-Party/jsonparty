@@ -53,7 +53,7 @@ class EpisodeIndexer
                         tvrage_e_id: e["id"],
                         end_time: e["airstamp"].to_time + e["runtime"].to_i.minutes
                         )
-      epi.save
+      if epi.save
 
       #queues up creation of a live feed for upcoming episodes (to be created an hour and 20 min before the airtime)
       # if epi.air_date > Time.now
@@ -64,10 +64,11 @@ class EpisodeIndexer
       # end
 
       #creates a live feed for upcoming episodes (no longer delayed, because Im not paying for persistent redis)
-      epi.feeds.create!(species: "live",
+        epi.feeds.create!(species: "live",
                         start_time: epi.air_date,
                         name: "live"
                         )
+      end
     end
   end
 end
