@@ -23,7 +23,7 @@ class EpisodeIndexer
     #API call to tvmaze
     resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes"
 
-    if resp.count > 5
+    if resp.code == 200
       #add new episodes to db
       resp.each do |e|
         unless @show.episodes.find_by(tvrage_e_id: e["id"]).present?
