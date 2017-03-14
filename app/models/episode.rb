@@ -20,7 +20,8 @@ class Episode < ApplicationRecord
   def can_only_have_one_episode_number_per_season
     if self.show.episodes.find_by(season: self.season, episode_number: self.episode_number).present? &&
         (self.episode_number != "special")
-      errors.add(:episode_number, "can't be duplicated in the same season")
+      self.episode_number = (self.episode_number + .5)
+      #errors.add(:episode_number, "can't be duplicated in the same season")
     end
   end
 
