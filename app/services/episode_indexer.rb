@@ -23,7 +23,7 @@ class EpisodeIndexer
     #API call to tvmaze
     resp = HTTParty.get "http://api.tvmaze.com/shows/#{@show.tvrage_id}/episodes"
 
-    unless resp['message'] == 'Page not found.'
+    unless resp['message'].present?
       #add new episodes to db
       resp.each do |e|
         unless @show.episodes.find_by(tvrage_e_id: e["id"]).present?
