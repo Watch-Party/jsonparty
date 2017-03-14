@@ -5,6 +5,7 @@ task update_episodes: :environment do
      if show.confirmed == true
        resp = HTTParty.get "http://api.tvmaze.com/shows/#{show.tvrage_id}/episodes"
        unless resp.count == show.episodes.count
+         puts "#{show.title} updating"
          ei = EpisodeIndexer.new(show)
          ei.update
          puts "#{show.title} updated"
