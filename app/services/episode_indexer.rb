@@ -27,7 +27,9 @@ class EpisodeIndexer
       #add new episodes to db
       resp.each do |e|
         unless @show.episodes.find_by(tvrage_e_id: e["id"]).present?
-          add_episode e
+          unless e["airstamp"].to_time <= ('Wed, 04 Aug 2016 21:17:26 UTC +00:00')
+            add_episode e
+          end
         end
       end
     end
