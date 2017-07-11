@@ -4,7 +4,7 @@
 
 
 ## To update user
-####PATCH or PUT "https://wp-spoileralert.herokuapp.com/auth"
+#### PATCH or PUT "https://wp-spoileralert.herokuapp.com/auth"
 
 **request**
 
@@ -50,7 +50,7 @@ only need fields that are being changed
             }
 
 ## To get user info
-####GET "https://wp-spoileralert.herokuapp.com/users/:user_id"
+#### GET "https://wp-spoileralert.herokuapp.com/users/:user_id"
 
 **request**
 
@@ -80,7 +80,7 @@ no additional info needed
 
 
 ## To get posts for an episode (only posts before episode start time)
-####GET "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
+#### GET "https://wp-spoileralert.herokuapp.com/:showname/:season#/:episode#/posts"
 
 **request**
 
@@ -104,7 +104,7 @@ no additional info needed
 
 
 ## To watch user
-####POST "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+#### POST "https://wp-spoileralert.herokuapp.com/watch/:user_id"
 note: user_id is of the user being watched
 
 **request**
@@ -121,7 +121,7 @@ no additional info needed
 
 
 ## To UNwatch user
-####DELETE "https://wp-spoileralert.herokuapp.com/watch/:user_id"
+#### DELETE "https://wp-spoileralert.herokuapp.com/watch/:user_id"
 note: user_id is of the user being unwatched
 
 **request**
@@ -138,7 +138,7 @@ no additional info needed
 
 
 ## To get recent and popular show data
-####GET 'https://wp-spoileralert.herokuapp.com/search/init'
+#### GET 'https://wp-spoileralert.herokuapp.com/search/init'
 
 **request**
 
@@ -183,7 +183,7 @@ no additional info needed
 
 
 ## To search for shows by title
-####GET 'https://wp-spoileralert.herokuapp.com/search/shows?criteria="thing to search for"'
+#### GET 'https://wp-spoileralert.herokuapp.com/search/shows?criteria="thing to search for"'
 
 **request**
 
@@ -205,7 +205,7 @@ no additional info needed
 
 
 ## To search for users by screen name or email
-####GET 'https://wp-spoileralert.herokuapp.com/search/users?criteria="thing to search for"'
+#### GET 'https://wp-spoileralert.herokuapp.com/search/users?criteria="thing to search for"'
 
 **request**
 
@@ -224,7 +224,7 @@ no additional info needed
             }
 
 ## To get basic show info
-####GET 'https://wp-spoileralert.herokuapp.com/:showname/info'
+#### GET 'https://wp-spoileralert.herokuapp.com/:showname/info'
 
 **request**
 
@@ -249,7 +249,7 @@ no additional info needed
 
 
 ## To get info for recently aired shows
-####GET 'https://wp-spoileralert.herokuapp.com/recent'
+#### GET 'https://wp-spoileralert.herokuapp.com/recent'
 
 **request**
 
@@ -268,7 +268,7 @@ no additional info needed
 
 
 ## To get basic episode info
-####GET 'https://wp-spoileralert.herokuapp.com/episodes/:episode_id'
+#### GET 'https://wp-spoileralert.herokuapp.com/episodes/:episode_id'
 
 **request**
 
@@ -284,7 +284,7 @@ no additional info needed
 
 
 ## To get upcoming episode info
-####GET 'https://wp-spoileralert.herokuapp.com/upcoming'
+#### GET 'https://wp-spoileralert.herokuapp.com/upcoming'
 
 **request**
 
@@ -315,10 +315,10 @@ no additional info needed
 
 
 
-##Is it any good?
+## Is it any good?
 [Yes](http://news.ycombinator.com/item?id=3067434)
 
-##A Thanks To...
+## A Thanks To...
 [TVMAZE-API](http://www.tvmaze.com/api): An api for tv shows and their episodes
 
 .
